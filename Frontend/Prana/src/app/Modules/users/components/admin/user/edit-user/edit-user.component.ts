@@ -50,12 +50,10 @@ export class EditUserComponent {
         this.userForm.get('last_name')?.setValue(lastNameInUpperCase);
         this.userService.updateUser(userId, this.userForm.value).subscribe({
           next: (response) => {
-            console.log('Usuario actualizado con éxito');
             this.dialogService.showSuccessDialog('Usuario Editado con éxito');
             this.router.navigate(['Dashboard/accounts/users']); // Ajusta la ruta según sea necesario
           },
           error: (error: HttpErrorResponse) => {
-            console.log(error)
           
             // Aquí manejas el error basado en el mensaje específico
             if (error.error.message.includes("DNI")) {
@@ -71,13 +69,12 @@ export class EditUserComponent {
           },
         });
       } else {
-        console.error(
+        this.dialogService.showErrorDialog(
           'Error: No se pudo obtener el ID del usuario para la actualización.'
         );
         // Manejar el caso en que no se tiene un ID de usuario
       }
     } else {
-      console.log('El formulario no es válido');
       // Manejar el caso en que el formulario no es válido
     }
   }

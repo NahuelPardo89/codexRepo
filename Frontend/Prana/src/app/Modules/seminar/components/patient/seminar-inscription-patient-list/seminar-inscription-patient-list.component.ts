@@ -100,7 +100,6 @@ export class SeminarInscriptionPatientListComponent {
           .deletePatientInscription(inscription_id)
           .pipe(
             catchError((error) => {
-              console.error('Error en la solicitud:', error);
               // Checks "non_field_errors"
               if (error.error && error.error.non_field_errors) {
                 const errorMessage = error.error.non_field_errors[0];

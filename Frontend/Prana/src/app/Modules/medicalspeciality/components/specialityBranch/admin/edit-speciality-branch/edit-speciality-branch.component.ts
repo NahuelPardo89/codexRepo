@@ -78,7 +78,6 @@ export class EditSpecialityBranchComponent {
                // Ajusta la ruta según sea necesario
             },
             error: (error) => {
-              console.error('Error al actualizar Rama de Especialidad', error);
               this.dialogService.showErrorDialog(
                 'Error al actualizar Rama Especialidad'
               );
@@ -86,11 +85,9 @@ export class EditSpecialityBranchComponent {
             },
           });
       } else {
-        console.error('Error: No se pudo obtener el ID de branch.');
         // Manejar el caso en que no se tiene un ID de usuario
       }
     } else {
-      console.log('El formulario no es válido');
       // Manejar el caso en que el formulario no es válido
     }
   }

@@ -2,14 +2,17 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['api.centroterapeuticoprana.com','centroterapeuticoprana.com','www.centroterapeuticoprana.com']
-CORS_ALLOWED_ORIGINS = [
-     #"http://localhost:4200",
-    #'http://216.196.63.221:4200',
-    'https://centroterapeuticoprana.com',
-    'http://centroterapeuticoprana.com',	
-    # !AcÃ¡ poner ip y puerto del frontÂ¡
-]
+# Hosts and origins can be supplied through environment variables.  When running
+# locally these fall back to common development values so the application works
+# without additional configuration.
+ALLOWED_HOSTS = env.list(
+    "ALLOWED_HOSTS",
+    default=["localhost", "127.0.0.1"],
+)
+CORS_ALLOWED_ORIGINS = env.list(
+    "CORS_ALLOWED_ORIGINS",
+    default=["http://localhost:4200"],
+)
 
 
 # Database

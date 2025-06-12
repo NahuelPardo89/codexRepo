@@ -62,11 +62,9 @@ export class EditInsuranceDoctorComponent {
           }
         });
       } else {
-        console.error('Error: No se pudo obtener el ID del usuario para la actualización.');
         // Manejar el caso en que no se tiene un ID de usuario
       }
     } else {
-      console.log('El formulario no es válido');
       // Manejar el caso en que el formulario no es válido
     }
   }

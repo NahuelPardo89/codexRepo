@@ -120,7 +120,6 @@ export class RoomAdminCreateComponent {
         cost: this.roomForm.value.cost,
       };
 
-      //console.log('BODY: ', body);
       const confirmAppointment = this.dialogService.openConfirmDialog(
         'Desea confirmar la creación de la sala?'
       );
@@ -130,7 +129,6 @@ export class RoomAdminCreateComponent {
             .createAdminRoom(body)
             .pipe(
               catchError((error) => {
-                console.error('Error en la solicitud:', error);
 
                 // Checks "non_field_errors"
                 if (error.error && error.error.non_field_errors) {

@@ -73,7 +73,6 @@ export class ListUserComponent {
     );
 
     confirmDialogRef.afterClosed().subscribe((confirmResult) => {
-      console.log('eliminar usuario');
       if (confirmResult) {
         this.userService.deleteUser(id).subscribe({
           next: () => {
@@ -101,13 +100,11 @@ export class ListUserComponent {
 
     this.userService.updateUser(user.id, user).subscribe({
       next: () => {
-        console.log('Usuario actualizado con éxito');
         this.dialogService.showSuccessDialog('Usuario Activado con éxito');
 
         this.setDataTable();
       },
       error: (error) => {
-        console.error('Error al actualizar el usuario', error);
         this.dialogService.showErrorDialog('Error al Activar el usuario');
         // Aquí podrías añadir alguna lógica para manejar el error, como mostrar un mensaje al usuario
       },

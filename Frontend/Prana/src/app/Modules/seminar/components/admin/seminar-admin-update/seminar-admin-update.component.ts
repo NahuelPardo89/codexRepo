@@ -187,7 +187,6 @@ export class SeminarAdminUpdateComponent {
         patients: [],
       };
 
-      //console.log('BODY: ', filteredBody);
       const confirmAppointment = this.dialogService.openConfirmDialog(
         'Confirma la actualización del taller'
       );
@@ -197,7 +196,6 @@ export class SeminarAdminUpdateComponent {
             .updateSeminar(history.state.seminar.id, filteredBody)
             .pipe(
               catchError((error) => {
-                console.error('Error en la solicitud:', error);
 
                 // Checks "non_field_errors"
                 if (error.error && error.error.non_field_errors) {

@@ -48,7 +48,6 @@ export class EditmypatientComponent {
               this.router.navigate(['Dashboard/accounts/myaccount']); // Ajusta la ruta según sea necesario
             },
             error: (error) => {
-              console.log(error);
               this.dialogService.showErrorDialog(
                 'Error al actualizar el Paciente'
               );

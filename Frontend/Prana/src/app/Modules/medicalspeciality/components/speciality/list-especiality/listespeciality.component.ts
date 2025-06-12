@@ -112,7 +112,6 @@ export class ListespecialityComponent {
           this.setDataTable();
         },
         error: (error) => {
-          console.error('Error al actualizar obra social', error);
           this.dialogService.showErrorDialog('Error al Activar Obra Social');
           // Aquí podrías añadir alguna lógica para manejar el error, como mostrar un mensaje al usuario
         },

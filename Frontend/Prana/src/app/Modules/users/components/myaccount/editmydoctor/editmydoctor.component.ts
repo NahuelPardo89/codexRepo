@@ -71,20 +71,18 @@ export class EditmydoctorComponent {
             this.router.navigate(['Dashboard/accounts/myaccount']);
           },
           error: (error) => {
-            console.log(error);
             this.dialogService.showErrorDialog(
               'Error al actualizar el Profesional'
             );
           },
         });
       } else {
-        console.error(
+        this.dialogService.showErrorDialog(
           'Error: No se pudo obtener el ID del usuario para la actualización.'
         );
         // Manejar el caso en que no se tiene un ID de usuario
       }
     } else {
-      console.log('El formulario no es válido');
       // Manejar el caso en que el formulario no es válido
     }
   }

@@ -7,7 +7,7 @@ import { Newsletter } from 'src/app/Models/newsletter/newsletter.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class NewletterService {
+export class NewsletterService {
   private subscribeUrl: string = environment.api_Url+'newletter/subscribe/';
   private sendUrl: string = environment.api_Url+'newletter/send/';
   constructor(private http: HttpClient) { }

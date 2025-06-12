@@ -81,7 +81,6 @@ export class ScheduleAdminCreateComponent {
         end_hour: this.scheduleForm.value.end_hour,
       };
 
-      //console.log('BODY: ', body);
       const confirmAppointment = this.dialogService.openConfirmDialog(
         'Desea confirmar la creación del horario?'
       );
@@ -91,7 +90,6 @@ export class ScheduleAdminCreateComponent {
             .createAdminSchedule(body)
             .pipe(
               catchError((error) => {
-                console.error('Error en la solicitud:', error);
 
                 // Checks "non_field_errors"
                 if (error.error && error.error.non_field_errors) {

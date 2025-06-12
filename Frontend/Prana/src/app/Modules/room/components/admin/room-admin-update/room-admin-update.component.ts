@@ -132,7 +132,6 @@ export class RoomAdminUpdateComponent {
         cost: this.roomForm.value.cost,
       };
 
-      //console.log('BODY: ', body);
       const confirmAppointment = this.dialogService.openConfirmDialog(
         'Tenga en cuenta que al actualizar una sala, los cambios se reflejarán en todos los talleres donde se utilice dicha sala <br> ¿Confirma la actualización de la sala?'
       );
@@ -142,7 +141,6 @@ export class RoomAdminUpdateComponent {
             .updateAdminRoom(history.state.room.id, body)
             .pipe(
               catchError((error) => {
-                console.error('Error en la solicitud:', error);
 
                 // Checks "non_field_errors"
                 if (error.error && error.error.non_field_errors) {

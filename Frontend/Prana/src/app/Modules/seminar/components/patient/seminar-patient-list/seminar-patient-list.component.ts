@@ -99,7 +99,6 @@ export class SeminarPatientListComponent {
           patient: data.id,
           meetingNumber: 1,
         };
-        //console.log('BODY: ', filteredBody);
 
         const confirmAppointment = this.dialogService.openConfirmDialog(
           'Se enviará una solicitud de inscripción al taller'
@@ -110,7 +109,6 @@ export class SeminarPatientListComponent {
               .createPatientSeminarInscription(filteredBody)
               .pipe(
                 catchError((error) => {
-                  console.error('Error en la solicitud:', error);
 
                   // Checks "non_field_errors"
                   if (error.error && error.error.non_field_errors) {
