@@ -223,7 +223,6 @@ class DoctorSpecialityBranchViewSet(viewsets.ViewSet):
 
     def list(self, request):
         doctor_id = request.query_params.get('doctor_id')
-        print(doctor_id)
         if not doctor_id:
             return Response({"message": "Doctor ID no proporcionado"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -250,18 +249,14 @@ class MeDoctorSpecialityBranchViewSet(viewsets.ViewSet):
 
     def list(self, request):
         doctor_id = request.user.doctorProfile.id
-        print(request)
 
         try:
             doctor = DoctorProfile.objects.get(pk=doctor_id)
-            print(doctor)
             # Obtener todas las especialidades del doctor
             doctor_specialities = doctor.specialty.all()
-            print(doctor_specialities)
             # Filtrar las ramas que pertenecen a las especialidades del doctor
             branches = SpecialityBranch.objects.filter(
                 speciality__in=doctor_specialities, is_active=True)
-            print(branches)
 
             serializer = SpecialityBranchListSerializer(branches, many=True)
             return Response(serializer.data)
@@ -578,7 +573,6 @@ class DoctorProfileAdminViewSet(BaseAdminViewSet):
         return queryset
 
     def create(self, request):
-        print(request.data, "es este")
         userId = request.data.get('user')
 
         if DoctorProfile.objects.filter(user=userId).exists():
@@ -622,19 +616,7 @@ class DoctorProfileAdminViewSet(BaseAdminViewSet):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # def create(self, request):
-    #     print(request.data)
-    #     instance_serializer = self.createUpdate_serializer_class(
-    #         data=request.data)
-    #     if instance_serializer.is_valid():
-    #         instance = instance_serializer.save()
-    #         return Response({
-    #             'message': 'Profile creado correctamente.'
-    #         }, status=status.HTTP_201_CREATED)
-    #     return Response({
-    #         'message': 'Hay errores en el registro de Profile',
-    #         'errors': instance_serializer.errors
-    #     }, status=status.HTTP_400_BAD_REQUEST)
+
 
 # NORMAL USERS VIEWSETS
 
