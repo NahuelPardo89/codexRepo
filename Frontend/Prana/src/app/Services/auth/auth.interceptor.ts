@@ -9,6 +9,7 @@ import {
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import { AuthService } from 'src/app/Services/auth/auth.service';
+import { StoreService } from '../store/store.service';
 import { environment } from 'src/enviroments/environment';
 
 @Injectable()
@@ -18,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
     null
   );
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private store: StoreService) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -39,14 +40,13 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private addAuthenticationToken(request: HttpRequest<any>): HttpRequest<any> {
-    const accessToken = localStorage.getItem('access_token');
+    const accessToken = this.store.getAccessToken();
     if (!accessToken) {
-      return request;
+      return request.clone({ withCredentials: true });
     }
     return request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      setHeaders: { Authorization: `Bearer ${accessToken}` },
+      withCredentials: true,
     });
   }
 

@@ -14,6 +14,7 @@ from rest_framework import viewsets, permissions, status, generics, mixins
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenRefreshView
 from apps.users.models import User
 from apps.usersProfile.models import PatientProfile
 from apps.users.api.serializers import (
@@ -201,18 +202,21 @@ class LoginAPI(generics.GenericAPIView):
             user.save()
             refresh = RefreshToken.for_user(user)
 
-            # Determina los perfiles del usuario
             roles = self.get_user_roles(user)
 
-            return Response({
+            response = Response({
                 "user": UserShortSerializer(user, context=self.get_serializer_context()).data,
                 "roles": roles,
                 "refresh": str(refresh),
                 "access": str(refresh.access_token),
                 "message": "Usuario logueado con éxito"
             }, status=status.HTTP_200_OK)
+            response.set_cookie('access_token', str(refresh.access_token), httponly=True, secure=True, samesite='Lax')
+            response.set_cookie('refresh_token', str(refresh), httponly=True, secure=True, samesite='Lax')
+            return response
         else:
-            return Response({"message": "Usuario o Contraseña incorrecto"}, status=status.HTTP_400_BAD_REQUEST)
+            error = serializer.errors.get('non_field_errors', ["Usuario o Contraseña incorrecto"])[0]
+            return Response({"message": error}, status=status.HTTP_401_UNAUTHORIZED)
 
     def get_user_roles(self, user):
         roles = []
@@ -243,11 +247,33 @@ class LogoutAPI(generics.GenericAPIView):
 
             token = RefreshToken(refresh_token)
             token.blacklist()
-            return Response({"message": "Sesión cerrada con éxito"}, status=status.HTTP_200_OK)
+            response = Response({"message": "Sesión cerrada con éxito"}, status=status.HTTP_200_OK)
+            response.delete_cookie('access_token')
+            response.delete_cookie('refresh_token')
+            return response
 
         except Exception as e:
             print(e)
             return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class CookieTokenRefreshView(TokenRefreshView):
+    """Allow refresh token from HTTP-only cookie"""
+
+    def post(self, request, *args, **kwargs):
+        if 'refresh' not in request.data:
+            refresh_token = request.COOKIES.get('refresh_token')
+            if refresh_token:
+                request.data = request.data.copy()
+                request.data['refresh'] = refresh_token
+
+        response = super().post(request, *args, **kwargs)
+        if response.status_code == status.HTTP_200_OK:
+            access = response.data.get('access')
+            refresh = response.data.get('refresh')
+            response.set_cookie('access_token', access, httponly=True, secure=True, samesite='Lax')
+            response.set_cookie('refresh_token', refresh, httponly=True, secure=True, samesite='Lax')
+        return response
 
 
 class RegisterAPI(generics.GenericAPIView):
