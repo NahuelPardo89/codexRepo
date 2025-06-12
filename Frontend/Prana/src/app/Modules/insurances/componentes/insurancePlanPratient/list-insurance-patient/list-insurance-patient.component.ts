@@ -109,13 +109,11 @@ export class ListInsurancePatientComponent {
 
     //this.insuranceService.update(insurance.id, insurance).subscribe({
     //  next: () => {
-    //    console.log('Obra Social actualizado con éxito');
     //    this.dialogService.showSuccessDialog('Obra Social Activada con éxito');
 
    //     this.setDataTable();
    //   },
   //    error: (error) => {
-   //     console.error('Error al actualizar obra social', error);
    //     this.dialogService.showErrorDialog('Error al Activar Obra Social');
         // Aquí podrías añadir alguna lógica para manejar el error, como mostrar un mensaje al usuario
   ////    },

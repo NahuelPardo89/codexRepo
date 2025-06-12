@@ -78,7 +78,6 @@ export class AuthService {
       .pipe(
         tap((response) => {
           if (response.status === 201) {
-            console.log(response.body);
             this.handleLogin(response.body!);
           }
         }),
