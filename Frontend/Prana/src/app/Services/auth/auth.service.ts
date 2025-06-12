@@ -54,22 +54,16 @@ export class AuthService {
       this.logout();
     }
   }
-  login(user: LoginUser): void {
-    this.http
-      .post<JwtResponse>(this.loginUrl, user)
+  login(user: LoginUser): Observable<JwtResponse> {
+    return this.http
+      .post<JwtResponse>(this.loginUrl, user, { withCredentials: true })
       .pipe(
-        tap((response) => {
-          this.handleLogin(response);
-        }),
+        tap((response) => this.handleLogin(response)),
         catchError((error) => {
-          this.dialogService.showErrorDialog(
-            'Usuario o Contraseña incorrectos'
-          );
-          this.handleError(error, 'Error al iniciar sesión');
+          this.dialogService.showErrorDialog(error.error?.message || 'Usuario o Contraseña incorrectos');
           return throwError(() => new Error('Error al iniciar sesión'));
         })
-      )
-      .subscribe();
+      );
   }
 
   register1(user: RegisterUser): Observable<HttpResponse<JwtResponse>> {
@@ -94,7 +88,7 @@ export class AuthService {
   logout(): Observable<void> {
     const refreshToken = this.storeService.getRefreshToken();
     this.handleLogout();
-    return this.http.post<void>(this.logoutUrl, { refresh: refreshToken }).pipe(
+    return this.http.post<void>(this.logoutUrl, { refresh: refreshToken }, { withCredentials: true }).pipe(
       tap(() => this.handleLogout()),
       catchError((error) => {
         // Incluso si hay un error, limpiamos el cliente
@@ -116,7 +110,7 @@ export class AuthService {
       .post<JwtResponse>(
         this.refreshTokenUrl,
         { refresh: refreshToken },
-        { observe: 'response' }
+        { observe: 'response', withCredentials: true }
       )
       .pipe(
         tap((response) => {
@@ -136,6 +130,10 @@ export class AuthService {
   }
   get isLogged(): Observable<boolean> {
     return this.isloggedIn.asObservable();
+  }
+
+  isLoggedInSync(): boolean {
+    return this.isloggedIn.value;
   }
 
   private handleError(
