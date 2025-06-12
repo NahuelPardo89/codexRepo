@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { JwtResponse } from 'src/app/Models/user/jwtResponse.interface';
 import { LoginUser } from 'src/app/Models/user/loginUser.interface';
 import { AuthService } from 'src/app/Services/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -16,6 +17,7 @@ import { AuthService } from 'src/app/Services/auth/auth.service';
 export class LoginComponent implements OnInit , OnDestroy{
   loginForm!: FormGroup;
   public errorMessage: string = '';
+  private loginSub?: Subscription;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -29,15 +31,13 @@ export class LoginComponent implements OnInit , OnDestroy{
     });
   }
   ngOnDestroy(): void {
-      
+    this.loginSub?.unsubscribe();
   }
   onSubmit(): void {
     if (this.loginForm.valid) {
       const user: LoginUser = this.loginForm.value;
 
-
-  
-      this.authService.login(user)
+      this.loginSub = this.authService.login(user).subscribe();
 
     }
   }
