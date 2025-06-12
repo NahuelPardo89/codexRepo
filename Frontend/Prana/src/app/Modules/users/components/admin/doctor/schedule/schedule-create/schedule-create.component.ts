@@ -64,7 +64,6 @@ export class ScheduleCreateComponent {
         error: error => this.dialogService.showErrorDialog("hubo un error al crear el horario")
       });
     } else {
-      console.log('El formulario no es válido');
     }
   }
   onCancel(){

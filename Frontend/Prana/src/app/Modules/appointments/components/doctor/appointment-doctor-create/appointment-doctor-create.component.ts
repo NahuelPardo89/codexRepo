@@ -926,7 +926,6 @@ export class AppointmentDoctorCreateComponent implements OnInit {
       ) {
         filteredBody.health_insurance = formValues.health_insurance;
       }
-      //console.log('BODY: ', filteredBody);
       const confirmAppointment = this.dialogService.openConfirmDialog(
         `${this.displayPreviewAppointment()}`
       );
@@ -940,7 +939,6 @@ export class AppointmentDoctorCreateComponent implements OnInit {
             .createDoctorAppointment(filteredBody)
             .pipe(
               catchError((error) => {
-                console.error('Error en la solicitud:', error);
 
                 // Close processing dialog
                 loadingDialog.close();

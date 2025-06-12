@@ -1081,7 +1081,6 @@ export class AppointmentAdminCreateComponent implements OnInit {
       ) {
         filteredBody.health_insurance = formValues.health_insurance;
       }
-      //console.log('BODY: ', filteredBody);
       const confirmAppointment = this.dialogService.openConfirmDialog(
         `${this.displayPreviewAppointment()}`
       );
@@ -1096,7 +1095,6 @@ export class AppointmentAdminCreateComponent implements OnInit {
             .createAdminAppointment(filteredBody)
             .pipe(
               catchError((error) => {
-                console.error('Error en la solicitud:', error);
 
                 loadingDialog.close();
                 // Checks "non_field_errors"

@@ -102,7 +102,6 @@ export class ScheduleAdminUpdateComponent {
         end_hour: this.scheduleForm.value.end_hour,
       };
 
-      //console.log('BODY: ', body);
       const confirmAppointment = this.dialogService.openConfirmDialog(
         'Tenga en cuenta que al actualizar un horario, los cambios se reflejarán en todos los talleres donde se utilice dicha horario <br> ¿Confirma la actualización?'
       );
@@ -112,7 +111,6 @@ export class ScheduleAdminUpdateComponent {
             .updateAdminSchedule(history.state.schedule.id, body)
             .pipe(
               catchError((error) => {
-                console.error('Error en la solicitud:', error);
 
                 // Checks "non_field_errors"
                 if (error.error && error.error.non_field_errors) {

@@ -60,7 +60,6 @@ export class PaymentMethodEditComponent {
         });
       } 
     } else {
-      console.log('El formulario no es válido');
       // Manejar el caso en que el formulario no es válido
     }
   }

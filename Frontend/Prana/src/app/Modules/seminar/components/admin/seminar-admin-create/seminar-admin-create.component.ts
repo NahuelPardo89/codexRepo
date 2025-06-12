@@ -206,7 +206,6 @@ export class SeminarAdminCreateComponent {
         patients: [],
       };
 
-      //console.log('BODY: ', filteredBody);
       const confirmAppointment = this.dialogService.openConfirmDialog(
         'Confirma la creación del taller'
       );
@@ -216,7 +215,6 @@ export class SeminarAdminCreateComponent {
             .createSeminar(filteredBody)
             .pipe(
               catchError((error) => {
-                console.error('Error en la solicitud:', error);
 
                 // Checks "non_field_errors"
                 if (error.error && error.error.non_field_errors) {

@@ -101,7 +101,6 @@ export class PatientListComponent {
         this.setDataTable();
       },
       error: (error) => {
-        console.log(error);
         this.dialogService.showErrorDialog('Error al Activar el Paciente');
         // Aquí podrías añadir alguna lógica para manejar el error, como mostrar un mensaje al usuario
       },

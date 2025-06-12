@@ -82,7 +82,6 @@ export class DoctorListComponent {
     );
 
     confirmDialogRef.afterClosed().subscribe((confirmResult) => {
-      console.log('eliminar usuario');
       if (confirmResult) {
         this.doctorService.deleteDoctor(id).subscribe({
           next: () => {

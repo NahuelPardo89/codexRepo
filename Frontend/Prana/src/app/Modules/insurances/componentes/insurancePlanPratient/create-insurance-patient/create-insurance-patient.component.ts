@@ -79,7 +79,6 @@ export class CreateInsurancePatientComponent implements OnInit {
     if (this.insurancePatientForm.valid) {
       const patientid =this.insurancePatientForm.value.patient.id
       this.insurancePatientForm.value.patient=patientid;
-      console.log(this.insurancePatientForm.value)
       this.insurancePatientService.create(this.insurancePatientForm.value).subscribe({
         next: (response) => {
               this.dialog.showSuccessDialog("Obra Social agregada correctamente");

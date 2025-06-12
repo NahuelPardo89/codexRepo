@@ -55,12 +55,10 @@ export class EditinstagramComponent implements OnInit {
     const patientData = this.patientForm.value;
     this.patientService.updatePatient(this.userPranaId, patientData).subscribe(
       (updatedPatient) => {
-        console.log('Paciente actualizado:', updatedPatient);
         // Mostrar el diálogo de éxito
         this.dialogService.showSuccessDialog('Cuenta de Instagram guardada con éxito');
       },
       (error) => {
-        console.error('Error al actualizar el paciente:', error);
         // Manejar errores aquí, si es necesario
       }
     );

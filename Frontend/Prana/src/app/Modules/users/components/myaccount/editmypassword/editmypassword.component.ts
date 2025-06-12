@@ -68,7 +68,7 @@ export class EditmypasswordComponent {
           },
         });
       } else {
-        console.error(
+        this.dialogService.showErrorDialog(
           'Error: No se pudo obtener el ID del usuario para la actualización.'
         );
         // Manejar el caso en que no se tiene un ID de usuario

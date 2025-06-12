@@ -316,7 +316,6 @@ export class SeminarInscriptionAdminUpdateComponent {
         filteredBody.insurance = formValues.insurance;
       }
 
-      //console.log('BODY: ', filteredBody);
       const confirmAppointment = this.dialogService.openConfirmDialog(
         'Confirma la actualización de esta inscripción'
       );
@@ -326,7 +325,6 @@ export class SeminarInscriptionAdminUpdateComponent {
             .updateSeminarInscription(this.currentInscription.id, filteredBody)
             .pipe(
               catchError((error) => {
-                console.error('Error en la solicitud:', error);
 
                 // Checks "non_field_errors"
                 if (error.error && error.error.non_field_errors) {
