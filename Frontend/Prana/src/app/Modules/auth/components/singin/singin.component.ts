@@ -64,16 +64,19 @@ export class SinginComponent implements OnInit {
           this.router.navigate(['/Dashboard/accounts/myaccount']);
         },
         error: (error) => {
-          
-          if (error.error.message.includes("DNI")) {
-            // Manejar error específico de DN
-            
-            this.registerForm.controls['dni'].setErrors({ 'dniExists': true });
+          if (error.error.message && error.error.message.includes("DNI")) {
+            // Manejar error específico de DNI
+            this.registerForm.controls['dni'].setErrors({ dniExists: true });
           }
-          if (error.error.message.includes("email")) {
+          if (error.error.message && error.error.message.includes("email")) {
             // Manejar error específico de email
-            
-            this.registerForm.controls['email'].setErrors({ 'emailExists': true });
+            this.registerForm.controls['email'].setErrors({ emailExists: true });
+          }
+          if (error.error.password) {
+            const backendMessage = Array.isArray(error.error.password)
+              ? error.error.password[0]
+              : error.error.password;
+            this.registerForm.controls['password'].setErrors({ passwordInvalid: backendMessage });
           }
         }
       });
