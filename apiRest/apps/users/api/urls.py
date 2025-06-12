@@ -10,7 +10,7 @@ router.register(r'admin', UserAdminViewSet, basename='admin-users')
 
 
 
-urlpatterns=[
+urlpatterns = [
     path('login/', LoginAPI.as_view(), name='login'),
     path('logout/', LogoutAPI.as_view(), name='logout'),
     path('refresh/', CookieTokenRefreshView.as_view(), name='token_refresh'),
@@ -18,4 +18,6 @@ urlpatterns=[
     path('me/', LoggedUserViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update'})),
     path('me/set_password/', LoggedUserViewSet.as_view({'post': 'set_password'}), name='user-set-password'),
     path('request-password-reset/', request_password_reset, name='request_password_reset'),
-]+router.urls
+
+] + router.urls
+
