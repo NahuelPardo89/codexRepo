@@ -8,7 +8,7 @@ class CopaymentReportSerializer(serializers.Serializer):
     Serializer for generating copayment reports based on date range, doctor, and specialty.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>   
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
     start_date = serializers.DateField()
     end_date = serializers.DateField()
@@ -33,7 +33,7 @@ class CopaymentReportSerializer(serializers.Serializer):
             serializers.ValidationError: If the validation fails.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>          
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         start_date = data.get('start_date')

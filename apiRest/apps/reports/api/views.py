@@ -26,7 +26,7 @@ def perform_report(serializer, request):
     and sums of copayments for patients and health insurances.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>   
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     start_date = serializer.validated_data['start_date']
@@ -108,7 +108,7 @@ class AdminAppointmentReportView(APIView):
     API view for generating copayment reports based on a date range, doctor, and specialty.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>   
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     serializer_class = CopaymentReportSerializer
@@ -130,7 +130,7 @@ class DoctorAppointmentReportView(APIView):
     API view for generating copayment reports based on a date range, doctor, and specialty.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>   
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     serializer_class = CopaymentReportSerializer

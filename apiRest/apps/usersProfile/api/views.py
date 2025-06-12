@@ -512,12 +512,12 @@ class DoctorInsurancePlanViewSet(viewsets.ModelViewSet):
         serializer = InsurancePlanDoctorCreateSerializer(
             data=data, context={'request': request})
         if serializer.is_valid():
-           
+
             # Asignar el doctorProfile del usuario logueado al InsurancePlanDoctor creado
             serializer.save(doctor=request.user.doctorProfile)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            
+
             errors = serializer.errors
             # Comprobar si existe el error de campos únicos
             if 'non_field_errors' in errors and errors['non_field_errors']:
@@ -651,7 +651,7 @@ class PatientUserViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mix
 
 class DoctorReportView(APIView):
     """
-    API view to retrieve the logged in doctor's id, the ids of the insurances they work with, 
+    API view to retrieve the logged in doctor's id, the ids of the insurances they work with,
     the ids of the branches they work with, and the name of their specialty.
     """
     permission_classes = [permissions.IsAuthenticated]
@@ -703,7 +703,7 @@ class SeminaristProfileAdminViewSet(viewsets.ModelViewSet):
             A Response object with a status code of 204, indicating that the
             SeminaristProfile object has been successfully soft deleted.
 
-        Author: Alvaro Olguin Armendariz         
+        Author: Alvaro Olguin Armendariz
         """
 
         seminarist_profile = self.get_object()
