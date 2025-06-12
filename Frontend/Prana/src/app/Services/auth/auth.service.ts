@@ -18,7 +18,7 @@ import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
 import { DialogService } from '../dialog/dialog.service';
 import { StoreService } from '../store/store.service';
-import { environment } from 'src/enviroments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

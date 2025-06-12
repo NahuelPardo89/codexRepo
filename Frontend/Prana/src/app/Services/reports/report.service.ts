@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ReportAppAdminPostInterface } from 'src/app/Models/reports/reportAppAdminPost.interface';
 import { ReportAppAdminResponseInterface } from 'src/app/Models/reports/reportAppAdminResponse.interface';
-import { environment } from 'src/enviroments/environment';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })

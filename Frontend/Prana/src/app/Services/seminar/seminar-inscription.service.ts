@@ -7,7 +7,7 @@ import {
   SeminarInscriptionAdminPostInterface,
   SeminarInscriptionPatientPostInterface,
 } from 'src/app/Models/seminar-inscription/admin/seminarInscriptionAdminGetDetailInterface.interface';
-import { environment } from 'src/enviroments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

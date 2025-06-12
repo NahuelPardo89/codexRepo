@@ -5,7 +5,7 @@ import {
   SeminarAdminDisplayInterface,
   SeminarAdminInterface,
 } from 'src/app/Models/seminar/seminarAdminInterface.interface';
-import { environment } from 'src/enviroments/environment';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })

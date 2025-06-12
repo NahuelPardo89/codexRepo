@@ -9,8 +9,12 @@ import {
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import { AuthService } from 'src/app/Services/auth/auth.service';
+
+import { environment } from 'src/environments/environment';
+
 import { StoreService } from '../store/store.service';
-import { environment } from 'src/enviroments/environment';
+
+
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

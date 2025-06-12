@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Patient, PatientView } from 'src/app/Models/Profile/patient.interface';
 import { catchError } from 'rxjs/operators';
-import { environment } from 'src/enviroments/environment';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })

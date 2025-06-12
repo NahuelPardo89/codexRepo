@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ScheduleAdminInterface } from 'src/app/Models/schedule/scheduleAdminInterface.interface';
-import { environment } from 'src/enviroments/environment';
+import { environment } from 'src/environments/environment';
 /**
  * Service for managing seminar schedules in the admin interface.
  * @author Alvaro Olguin Armendariz
