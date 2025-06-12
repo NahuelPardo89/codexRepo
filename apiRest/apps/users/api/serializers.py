@@ -7,6 +7,9 @@ from rest_framework import serializers
 from apps.users.models import User
 from apps.usersProfile.models import PatientProfile, HealthInsurance
 from django.contrib.auth.hashers import check_password
+import logging
+
+logger = logging.getLogger(__name__)
 
 class UserShortSerializer(serializers.ModelSerializer):
     class Meta:
@@ -41,7 +44,7 @@ class UserAdminSerializer(serializers.ModelSerializer):
                 name__iexact='PARTICULAR')
             patient_profile.insurances.add(particular_insurance)
         except HealthInsurance.DoesNotExist:
-            print("La obra social 'Particular' no existe.")
+            logger.warning("La obra social 'Particular' no existe.")
 
         patient_profile.save()
 
@@ -118,7 +121,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
                 name__iexact='Particular')
             patient_profile.insurances.add(particular_insurance)
         except HealthInsurance.DoesNotExist:
-            print("La obra social 'Particular' no existe.")
+            logger.warning("La obra social 'Particular' no existe.")
 
         patient_profile.save()
 

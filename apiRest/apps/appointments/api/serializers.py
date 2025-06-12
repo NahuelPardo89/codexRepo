@@ -4,6 +4,9 @@ from django.db.models import Q
 from rest_framework import serializers
 from apps.usersProfile.models import DoctorProfile, PatientProfile, InsurancePlanDoctor, HealthInsurance, SpecialityBranch
 from apps.appointments.models import Appointment, PaymentMethod
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def set_duration(attrs: dict, instance: Appointment = None) -> dict:
@@ -671,7 +674,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
                 patient_profile.insurances.add(particular_insurance)
                 patient_profile.save()
         except HealthInsurance.DoesNotExist:
-            print("La obra social 'Particular' no existe.")
+            logger.warning("La obra social 'Particular' no existe.")
 
         return appointment
 
