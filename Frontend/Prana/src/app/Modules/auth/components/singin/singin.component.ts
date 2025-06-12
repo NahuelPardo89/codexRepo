@@ -24,7 +24,11 @@ export class SinginComponent {
       last_name: ['', [Validators.required,Validators.pattern("^[a-zA-Z0-9+\-ñ ]*$")]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._+-ñ]+@[a-zA-Z0-9_.-]+\.[a-zA-Z]{2,4}$')]],
       phone: [''],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern('^(?!\\d+$).+')
+      ]]
       
     });
   }
@@ -60,16 +64,22 @@ export class SinginComponent {
           this.router.navigate(['/Dashboard/accounts/myaccount']);
         },
         error: (error) => {
-          
-          if (error.error.message.includes("DNI")) {
-            // Manejar error específico de DN
-            
-            this.registerForm.controls['dni'].setErrors({ 'dniExists': true });
+
+          if (error.error?.message?.includes("DNI")) {
+            // Manejar error específico de DNI
+            this.registerForm.controls['dni'].setErrors({ dniExists: true });
           }
-          if (error.error.message.includes("email")) {
+
+          if (error.error?.message?.includes("email")) {
             // Manejar error específico de email
-            
-            this.registerForm.controls['email'].setErrors({ 'emailExists': true });
+            this.registerForm.controls['email'].setErrors({ emailExists: true });
+          }
+
+          if (error.error?.password) {
+            const msg = Array.isArray(error.error.password)
+              ? error.error.password[0]
+              : error.error.password;
+            this.registerForm.controls['password'].setErrors({ passwordNumeric: msg });
           }
         }
       });

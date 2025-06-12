@@ -56,6 +56,8 @@
         <mat-error *ngIf="password?.invalid && (password?.dirty || password?.touched)">
           <span *ngIf="password?.errors?.['required']">La contraseña es requerida.</span>
           <span *ngIf="password?.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</span>
+          <span *ngIf="password?.errors?.['pattern']">La contraseña no puede contener solo números.</span>
+          <span *ngIf="password?.errors?.['passwordNumeric']">{{ password?.errors?.['passwordNumeric'] }}</span>
         </mat-error>
       </mat-form-field>
   
