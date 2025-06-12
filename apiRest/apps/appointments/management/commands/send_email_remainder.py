@@ -5,6 +5,9 @@ from django.utils.html import strip_tags
 from datetime import datetime, timedelta
 from apps.appointments.models import Appointment
 from django.core.mail import send_mail
+import logging
+
+logger = logging.getLogger(__name__)
 class Command(BaseCommand):
     help = 'Send reminder emails to patients with appointments the next day'
 
@@ -25,7 +28,7 @@ class Command(BaseCommand):
             subject = 'Recordatorio de Turno - NO RESPONDER'
             from_email = 'no-reply@tudominio.com'
             to_email = [patient.user.email]
-            print("email enviado a" ,patient.user.email)
+            logger.info("email enviado a %s", patient.user.email)
             msg = EmailMultiAlternatives(subject, text_content, from_email, to_email)
             msg.attach_alternative(html_content, "text/html")
 
