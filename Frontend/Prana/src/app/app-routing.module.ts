@@ -7,6 +7,7 @@ import { PageNotFoundComponent } from './Modules/shared/components/pagenotfound/
 import { SinginComponent } from './Modules/auth/components/singin/singin.component';
 import { PasswordResetRequestComponent } from './Modules/auth/components/password-reset-request/password-reset-request.component';
 import { LoginComponent } from './Modules/auth/components/login/login.component';
+import { AuthGuard } from './Services/auth/auth.guard';
 
 const routes: Route[] = [
  
@@ -19,6 +20,7 @@ const routes: Route[] = [
   
   {
     path: 'Dashboard',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./Modules/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
