@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtResponse } from 'src/app/Models/user/jwtResponse.interface';
@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/Services/auth/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit , OnDestroy{
+export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   public errorMessage: string = '';
   constructor(
@@ -27,9 +27,6 @@ export class LoginComponent implements OnInit , OnDestroy{
       dni: [null, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(1), Validators.max(999000000)]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
-  }
-  ngOnDestroy(): void {
-      
   }
   onSubmit(): void {
     if (this.loginForm.valid) {
