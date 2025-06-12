@@ -142,7 +142,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-ar'
 
-TIME_ZONE = 'America/Buenos_Aires'
+# Use the canonical tz database name recognized by pytz to avoid
+# initialization errors when Django validates TIME_ZONE.  The previous
+# value omitted the Argentina sub-region and caused a ValueError during
+# startup.
+TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
 USE_I18N = True
 
