@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from django.utils import timezone
+from django.contrib.auth.password_validation import validate_password
 
 from rest_framework import serializers
 
@@ -85,15 +86,20 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
     def validate(self, data):
-        user = authenticate(username=data.get(
-            'dni'), password=data.get('password'))
-        if user and user.is_active:
-            return user
+        user = authenticate(username=data.get('dni'), password=data.get('password'))
+        if user:
+            if user.is_active:
+                return user
+            raise serializers.ValidationError("Cuenta inactiva")
         raise serializers.ValidationError("Usuario o contraseña incorrecto")
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
     dni = serializers.IntegerField()
+
+    def validate_password(self, value):
+        validate_password(value)
+        return value
 
     class Meta:
         model = User

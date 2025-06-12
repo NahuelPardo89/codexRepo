@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SendnewletterComponent } from './components/sendnewletter/sendnewletter.component';
+import { SendNewsletterComponent } from './components/send-newsletter/send-newsletter.component';
 
 const routes: Routes = [
-  { path: 'send', component: SendnewletterComponent }
+  { path: 'send', component: SendNewsletterComponent }
 ];
 
 @NgModule({

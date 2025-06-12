@@ -382,7 +382,6 @@ export class DoctorReportsComponent implements OnInit {
         .getAdminAppointmentReport(filteredBody)
         .pipe(
           catchError((error) => {
-            console.error('Error en la solicitud:', error);
 
             // Checks for specific error on "non_field_errors"
             if (error.error && error.error.non_field_errors) {
@@ -433,7 +432,6 @@ export class DoctorReportsComponent implements OnInit {
         )
         .subscribe((data: ReportAppAdminResponseInterface) => {
           this.reportData = data;
-          //console.log(data);
           this.dialogService
             .showSuccessDialog(
               `Reporte generado con éxito! <br> se redireccionará a la pantalla de resultados`

@@ -82,7 +82,6 @@ export class ScheduleEditComponent {
         error: error => this.dialogService.showErrorDialog("hubo un error al editar el horario")
       });
     } else {
-      console.log('El formulario no es válido');
     }
   }
   onCancel(){

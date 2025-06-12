@@ -35,7 +35,6 @@ export class SeminaristListComponent {
 
   setDataTable() {
     this.seminaristService.getSeminaristsDisplay().subscribe((data) => {
-      console.log(data);
       this.dataSource = new MatTableDataSource(data);
       this.paginator._intl.itemsPerPageLabel = 'items por página';
       this.paginator._intl.firstPageLabel = 'primera página';
@@ -69,7 +68,6 @@ export class SeminaristListComponent {
     );
 
     confirmDialogRef.afterClosed().subscribe((confirmResult) => {
-      console.log('eliminar usuario');
       if (confirmResult) {
         this.seminaristService.deleteSeminarist(id).subscribe({
           next: () => {
