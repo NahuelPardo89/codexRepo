@@ -13,6 +13,7 @@ CORS_ALLOWED_ORIGINS = env.list(
     "CORS_ALLOWED_ORIGINS",
     default=["http://localhost:4200"],
 )
+CORS_ALLOW_CREDENTIALS = True
 
 
 # Database

@@ -8,6 +8,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     # otros dominios que desees permitir
 ]
+CORS_ALLOW_CREDENTIALS = True
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

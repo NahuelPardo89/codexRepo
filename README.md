@@ -93,6 +93,7 @@ The Django backend reads configuration from environment variables, typically via
 
 - `ALLOWED_HOSTS` - comma separated list of allowed hosts. If not provided, development defaults of `localhost,127.0.0.1` are used.
 - `CORS_ALLOWED_ORIGINS` - comma separated list of origins allowed by CORS. The default is `http://localhost:4200` for development.
+- `CORS_ALLOW_CREDENTIALS` - whether browsers can send credentials like cookies. Defaults to `True` when using the local settings.
 
 Create a `.env` file inside `apiRest/core/` with at least the following variables:
 
