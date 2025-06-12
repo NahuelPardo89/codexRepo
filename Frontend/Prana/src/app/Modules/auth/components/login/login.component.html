@@ -1,0 +1,28 @@
+<div class="container-sm">
+  <img src="../../../../../assets/img/logoNuevoVertical.png" alt="Logo Prana">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    
+    <mat-form-field class="ancho" appearance="outline">
+      <mat-label>DNI</mat-label>
+      <input matInput formControlName="dni" required>
+      <mat-error *ngIf="loginForm.controls['dni'].errors?.['required']">Ingrese su DNI</mat-error>
+      <mat-error *ngIf="loginForm.controls['dni'].errors?.['pattern']">Debe ingresar solo números</mat-error>
+      <mat-error *ngIf="loginForm.controls['dni'].errors?.['max']">Ingrese un DNI Correcto</mat-error>
+      <mat-error *ngIf="loginForm.controls['dni'].errors?.['min']">Ingrese un DNI Correcto</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="ancho" appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" formControlName="password" required>
+      <mat-error *ngIf="loginForm.controls['password'].errors?.['required']">Ingrese su contraseña</mat-error>
+      <mat-error *ngIf="loginForm.controls['password'].errors?.['minlength']">La contraseña debe tener al menos 8 caracteres</mat-error>
+    </mat-form-field>
+    <div *ngIf="errorMessage" class="error-message danger">
+      {{ errorMessage }}
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">Iniciar Sesión</button>
+  </form>
+    <p>¿No tenés cuenta?  <a routerLink="/singin">Registrarse</a>  </p> 
+    <p>¿Olvidaste tu Contraseña?  <a routerLink="/resetpass">Recuperar Contraseña</a>  </p>
+    
+</div>

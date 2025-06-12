@@ -1,0 +1,81 @@
+<div>
+  <div
+    class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+  >
+    <h1 class="text-white">Horarios Talleres - Administrador</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="d-flex justify-content-start mb-3">
+      <button
+        class="btn btn-success"
+        routerLink="/Dashboard/schedule/admin/create"
+      >
+        <i class="material-symbols-outlined"></i>Nuevo Horario
+      </button>
+    </div>
+
+    <!-- Filter -->
+    <mat-form-field class="example-form-field">
+      <mat-label>Filtro Múltiple</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input />
+    </mat-form-field>
+    <div class="table-responsive">
+      <!-- Angular Material Table -->
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Weekday Column -->
+        <ng-container matColumnDef="weekday">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Día</th>
+          <td mat-cell *matCellDef="let row">{{ row.weekday }}</td>
+        </ng-container>
+
+        <!-- Start Hour Column -->
+        <ng-container matColumnDef="start_hour">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Horario de Inicio
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.start_hour }}</td>
+        </ng-container>
+
+        <!-- End Hour Column -->
+        <ng-container matColumnDef="end_hour">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Horario de Finalización
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.end_hour }}</td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <div style="display: flex">
+              <button
+                class="btn btn-primary"
+                aria-label="Editar Horario"
+                (click)="onEdit(row)"
+              >
+                <i class="material-symbols-outlined">edit</i>
+              </button>
+              <button
+                class="btn btn-danger ms-3"
+                aria-label="Eliminar Horario"
+                (click)="onDelete(row.id)"
+              >
+                <i class="material-symbols-outlined">delete</i>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Row and columns definition -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <!-- Paginator -->
+    <mat-paginator
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

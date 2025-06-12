@@ -1,0 +1,37 @@
+<div class="container mt-3">
+    <div class="card">
+      <div class="card-header bg-info text-white text-center">
+        <h2>Crear Método de Pago</h2>
+      </div>
+      <div class="card-body">
+        <form
+          [formGroup]="paymentForm"
+          (ngSubmit)="onSubmit()"
+          class="create-user-form"
+        >
+          <!-- Campo Usuario (ID de usuario) -->
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" />
+            <mat-error
+              *ngIf="paymentForm.get('name')!.errors?.['required']"
+              >El campo Nombre es obligatorio</mat-error
+            >
+          </mat-form-field>
+  
+          
+  
+          <!-- Botones -->
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="!paymentForm.valid"
+          >
+            Crear Método de pago
+          </button>
+          <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

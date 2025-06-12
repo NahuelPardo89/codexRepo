@@ -1,0 +1,56 @@
+<div class="card">
+  <div
+    class="card-header bg-danger text-white text-center"
+    *ngIf="data.type === 'question'"
+  >
+    <h4>
+      <i class="material-symbols-outlined btn-icon">warning</i>
+    </h4>
+  </div>
+  <div
+    class="card-header bg-success text-white text-center"
+    *ngIf="data.type === 'success'"
+  >
+    <h4><i class="material-symbols-outlined btn-icon">check_circle</i></h4>
+  </div>
+  <div
+    class="card-header bg-danger text-white text-center"
+    *ngIf="data.type === 'error'"
+  >
+    <h4><i class="material-symbols-outlined btn-icon">report</i></h4>
+  </div>
+
+  <div class="card-body">
+    <div class="message">
+      <!-- Iconos de Material Design según el tipo de mensaje -->
+
+      <p [innerHTML]="data.message"></p>
+    </div>
+    <div class="actions">
+      <!-- Botones para los diálogos de confirmación o error -->
+      <button
+        *ngIf="data.type === 'question'"
+        class="btn btn-primary"
+        (click)="confirmDialog()"
+      >
+        Aceptar
+      </button>
+      <button
+        *ngIf="data.type === 'question'"
+        class="btn btn-secondary"
+        (click)="closeDialog()"
+      >
+        Cancelar
+      </button>
+
+      <!-- Botón para cerrar en caso de éxito o error -->
+      <button
+        *ngIf="data.type !== 'question'"
+        class="btn btn-primary"
+        (click)="closeDialog()"
+      >
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>

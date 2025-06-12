@@ -1,0 +1,184 @@
+{
+    "profesionales" : 
+    [
+        
+        {
+            "img" : "../../assets/img/profesionales/JULIETACAPELLINI.jpg" ,
+            "name": "Julieta Cappellini" ,
+            "title": "Psicóloga",
+            "description": "Recibida de la Universidad Nacional de Córdoba. Formada en terapia psicoanalítica para atencion a niños, adolescentes y adultos. Formación en psicodiagnóstico."
+        },
+        {
+            "img" : "../../assets/img/profesionales/MARIANAGUTIERREZ.jpg" ,
+            "name": "Mariana Gutierrez" ,
+            "title": "Psicóloga",
+            "description": "Terapia cognitiva conductual para adolescentes y adultos. Formación superior en salud mental perinatal. Formación en terapia se aceptación y compromiso."
+        },
+        {
+            "img" : "../../assets/img/profesionales/SILVANASETTI.jpg" ,
+            "name": "Silvana Setti" ,
+            "title": "Psiquiatra",
+            "description": "Tratamientos Faciales personalizados y asesoramiento profesional"
+        },
+        {
+            "img" : "../../assets/img/profesionales/MICAELAORTIZ.jpeg" ,
+            "name": "Micaela Ortiz" ,
+            "title": "Nutricionista",
+            "description": "Trabajo en el consultorio con un abordaje no restrictivo focalizado en el cambio de hábitos alimentarios que perduren en el tiempo. Realizo educación alimentaria constantemente. Adapto planes de alimentación a distintas patologia y realizo analisis de la composicion corporal mediante balanza de bioimpedancia (medicion de masa grasa y masa muscular)"
+        },
+        {
+            "img" : "../../assets/img/profesionales/FLORENCIACOTELA.jpg" ,
+            "name": "Florencia Cotela" ,
+            "title": "Psicóloga",
+            "description": "Psicoanálisis en niños, adolescentes y adultos."
+        },
+        {
+            "img" : "../../assets/img/profesionales/BELENCARRERAS.jpg" ,
+            "name": "Belen Carreras" ,
+            "title": "Psicóloga",
+            "description": "Tratamientos corporales: vela Slim Plus, criolipolisis, Electroestimulacion, masajes reductores y modeladores. Depilacion Definitiva Soprano Ice."
+        },
+        {
+            "img" : "../../assets/img/profesionales/MARIELALOPEZ.jpeg" ,
+            "name": "Mariela Lopez" ,
+            "title": "Médica clínica",
+            "description": "..."
+        },
+        {
+            "img" : "../../assets/img/profesionales/PATRICIABARRIONUEVO.jpeg" ,
+            "name": "Patricia Barrionuevo" ,
+            "title": "Pediatra",
+            "description": "..."
+        },
+        {
+            "img" : "../../assets/img/profesionales/MARIANABRUNO.jpg" ,
+            "name": "Mariana Bruno" ,
+            "title": "Psicopedagoga",
+            "description": "Neuropsicología del aprendizaje- Niños/adolescentes."
+        },
+        {
+            "img" : "../../assets/img/profesionales/giselagirardi.jpg" ,
+            "name": "Gisel Girardi" ,
+            "title": "Psicóloga",
+            "description": "Licenciada en Psicología con Orientación Cognitivo Integrativa. Formación en Evaluación, Estimulación y Rehabilitación Cognitiva en adolescentes y adultos. Psicoterapia a niños, adultos y adultos mayores. Formación en Terapia de Aceptación y Compromiso / Psicoterapia Analítico Funcional (ACT / FAP)."
+        },
+        {
+            "img" : "../../assets/img/profesionales/ERIKAGERASIMCHUK.jpg" ,
+            "name": "Erika Gerasimchuk" ,
+            "title": "Psicóloga",
+            "description": "Orientación psicoanalítica a niños, adolescentes y adultos."
+        },
+        {
+            "img" : "../../assets/img/profesionales/JULIETAFERNANDEZ.jpg" ,
+            "name": "Julieta Fernández" ,
+            "title": "Coach ontológico",
+            "description": "Mi profesión y mi propósito hoy es enfocarme especialmente en el acompañamiento personal del cliente a través de una fluida y natural dinámica de transformación mediante la cual las personas y organizaciones revisan, desarrollan y optimizan la forma de estar siendo en el mundo y entre ellas. A través de esta herramienta mi propósito como acompañante es alcanzar todos los objetivos propuestos a través de preguntas, autoobservación, reflexiones y el análisis del comportamiento, acompasando el desarrollo y la evolución de cada cliente."
+        },
+        
+       
+        {
+            "img" : "../../assets/img/profesionales/NOELIAFUNES.jpg" ,
+            "name": "Noelia Funes" ,
+            "title": "Psicopedagoga",
+            "description": "Tratamientos psicopedagógico, procesos de inclusión escolar (DAI), acompañamiento en tareas escolares y universitarias, organización y técnicas de estudio."
+        },
+        {
+            "img" : "../../assets/img/profesionales/AYELENLOMBARDI.jpg" ,
+            "name": "Ayelen Lombardi" ,
+            "title": "Psiquiatra"
+           
+        },
+        {
+            "img" : "../../assets/img/profesionales/CECILAANTE.jpg" ,
+            "name": "Cecilia Ante" ,
+            "title": "Psicopedagoga"
+           
+        },
+        {
+            "img" : "../../assets/img/profesionales/CRISTINAVEGAAYALA.jpg" ,
+            "name": "Cristina Vega Ayala",
+            "title": "Instructora de Yoga" 
+           
+        },
+        {
+            "img" : "../../assets/img/profesionales/FRANCISCOSURIN.jpg" ,
+            "name": "Francisco Surin",
+            "title": "Psicólogo" 
+           
+        },
+        {
+            "img" : "../../assets/img/profesionales/DENISESENZ.jpg" ,
+            "name": "Denise Senz",
+            "title": "Psicóloga"
+           
+        },
+        {
+            "img" : "../../assets/img/profesionales/EUGENIAALVAREZ.jpg" ,
+            "name": "Eugenia Alvarez",
+            "title": "Fonoaudióloga"
+           
+        },
+        {
+            "img" : "../../assets/img/profesionales/FLORENCIAARIAUDO.jpg" ,
+            "name": "Florencia Ariaudo",
+            "title": "Psiquiatra" 
+           
+        },
+        {
+            "img" : "../../assets/img/profesionales/MACARENAVAZQUEZ.jpg" ,
+            "name": "Macarena Vazquez",
+            "title": "Nutricionista" 
+           
+        },
+        {
+            "img" : "../../assets/img/profesionales/MARISAMONTIEL.jpg" ,
+            "name": "Marisa Montiel",
+            "title": "Psicóloga"
+           
+        },
+        {
+            "img" : "../../assets/img/profesionales/PAULAAVILA.jpg" ,
+            "name": "Paula Avila" ,
+            "title": "Psicomotricista"
+           
+        },
+        {
+            "img" : "../../assets/img/profesionales/PRISCILAPIUSSI.jpg" ,
+            "name": "Priscila Piussi",
+            "title": "Psicóloga"
+           
+        },
+        {
+            "img" : "../../assets/img/profesionales/ROMINARONDOLETTO.jpg" ,
+            "name": "Romina Rondoletto" ,
+            "title": "Psicóloga"
+           
+        },
+        {
+            "img" : "../../assets/img/profesionales/LUZMACIAS.jpeg" ,
+            "name": "Luz Macias" ,
+            "title": "Psicóloga"
+            
+        },
+        {
+            "img" : "../../assets/img/profesionales/IRINAMORETTI.jpeg" ,
+            "name": "Irina Moretti" ,
+            "title": "Psicóloga"
+        },
+        {
+            "img" : "../../assets/img/profesionales/SILVIAVILLAREAL.jpeg" ,
+            "name": "Silvia Villareal" ,
+            "title": "Psicóloga"
+        },
+        {
+            "img" : "../../assets/img/profesionales/DANIELAMARTINELLI.jpeg" ,
+            "name": "Daniela Martinelli" ,
+            "title": "Psicóloga"
+        },
+        {
+            "img" : "../../assets/img/profesionales/LUCIAAYUSO.jpeg" ,
+            "name": "Lucia Ayuso" ,
+            "title": "Puericulturista"
+        }
+    ]
+}

@@ -1,0 +1,164 @@
+<div>
+  <div
+    class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+  >
+    <h1 class="text-white">Listado de Turnos - Profesional</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="d-flex justify-content-start mb-3">
+      <button class="btn btn-info me-3" (click)="filterToday()">
+        <i class="material-symbols-outlined"></i>Turnos de Hoy
+      </button>
+      <button class="btn btn-info me-3" (click)="showAll()">
+        <i class="material-symbols-outlined"></i>Todos los Turnos
+      </button>
+      <button
+        class="btn btn-success"
+        routerLink="/Dashboard/appointments/doctor/create"
+      >
+        <i class="material-symbols-outlined"></i>Crear Turno
+      </button>
+    </div>
+
+    <!-- Filter -->
+    <mat-form-field class="example-form-field">
+      <mat-label>Filtro Múltiple</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input />
+    </mat-form-field>
+    <div class="table-responsive">
+      <!-- Angular Material Table -->
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Date Column -->
+        <ng-container matColumnDef="day">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+          <td mat-cell *matCellDef="let row">{{ row.day }}</td>
+        </ng-container>
+
+        <!-- Hour Column -->
+        <ng-container matColumnDef="hour">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Hora</th>
+          <td mat-cell *matCellDef="let row">{{ row.hour }}</td>
+        </ng-container>
+
+        <!-- Professional Column -->
+        <ng-container matColumnDef="doctor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Profesional</th>
+          <td mat-cell *matCellDef="let row">{{ row.doctor }}</td>
+        </ng-container>
+
+        <!-- Patient Column -->
+        <ng-container matColumnDef="patient">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Paciente</th>
+          <td mat-cell *matCellDef="let row">{{ row.patient }}</td>
+        </ng-container>
+
+        <!-- Specialty Column -->
+        <ng-container matColumnDef="specialty">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Especialidad
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.specialty }}</td>
+        </ng-container>
+
+        <!-- Branch Column -->
+        <ng-container matColumnDef="branch">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Especialidad - Rama
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.branch }}</td>
+        </ng-container>
+
+        <!-- HI Column -->
+        <ng-container matColumnDef="health_insurance">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Obra Social</th>
+          <td mat-cell *matCellDef="let row">{{ row.health_insurance }}</td>
+        </ng-container>
+
+        <!-- Patient Copayment Column -->
+        <ng-container matColumnDef="patient_copayment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Coseg. Paciente
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.patient_copayment }}</td>
+        </ng-container>
+
+        <!-- HI Copayment Column -->
+        <ng-container matColumnDef="hi_copayment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Coseg. O.Social
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.hi_copayment }}</td>
+        </ng-container>
+
+        <!-- Appointment Type Column -->
+        <ng-container matColumnDef="appointment_type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Encuentro</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.appointment_type }}
+          </td>
+        </ng-container>
+
+        <!-- Appointment Status Column -->
+        <ng-container matColumnDef="appointment_status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Estado del Turno
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.appointment_status }}</td>
+        </ng-container>
+
+        <!-- Payment Status Column -->
+        <ng-container matColumnDef="payment_status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Estado del Pago
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.payment_status }}</td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <div style="display: flex; align-items: center">
+              <button
+                class="btn btn-primary"
+                aria-label="Editar turno"
+                (click)="onEdit(row)"
+              >
+                <i class="material-symbols-outlined">edit</i>
+              </button>
+              <button
+                class="btn btn-danger ms-3"
+                aria-label="Eliminar turno"
+                (click)="onDelete(row.id)"
+              >
+                <i class="material-symbols-outlined">delete</i>
+              </button>
+              <!-- No longer used, replace this feature -->
+              <!-- <mat-icon
+                *ngIf="!canDelete(row)"
+                style="color: yellow"
+                matTooltip="Este turno se encuentra en estado pagado o su fecha es anterior al día corriente"
+                >warning</mat-icon
+              > -->
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          [class.bg-warning]="isPendingAndOverdueAppointment(row)"
+          [class.bg-success]="
+            row.appointment_status.toUpperCase() === 'CONFIRMADO'
+          "
+        ></tr>
+      </table>
+    </div>
+    <!-- Paginator -->
+    <mat-paginator
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

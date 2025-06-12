@@ -1,0 +1,157 @@
+<div
+  class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+>
+  <div class="card">
+    <div class="card-header bg-info text-dark text-center">
+      <h2>Editar Participante: {{ currentInscription.patient }}</h2>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="seminarInscriptionForm"
+        (ngSubmit)="onSubmit()"
+        class="create-user-form"
+      >
+        <!-- Seminar Status Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Estado de Inscripción</mat-label>
+          <mat-select formControlName="seminar_status">
+            <mat-option
+              *ngFor="let insc_status of seminar_status_choices"
+              [value]="insc_status.value"
+            >
+              {{ insc_status.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Meeting Number Field (input)-->
+        <mat-form-field appearance="outline">
+          <mat-label>N° de Encuentros</mat-label>
+          <input matInput formControlName="meetingNumber" />
+          <mat-error
+            *ngIf="seminarInscriptionForm.get('meetingNumber')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+          <mat-error
+            *ngIf="
+              seminarInscriptionForm.get('meetingNumber')!.hasError('pattern')
+            "
+          >
+            Este campo debe ser un número entero
+          </mat-error>
+          <mat-error
+            *ngIf="seminarInscriptionForm.get('meetingNumber')!.hasError('min')"
+          >
+            El número de encuentros debe ser un valor positivo
+          </mat-error>
+          <mat-error
+            *ngIf="seminarInscriptionForm.get('meetingNumber')!.hasError('max')"
+          >
+            El número de encuentros no puede ser mayor a 30
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Insurance Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Seleccionar obra social (Opcional) </mat-label>
+          <mat-select formControlName="insurance">
+            <mat-option
+              *ngFor="let insurance of insurances"
+              [value]="insurance.id"
+            >
+              {{ insurance.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Patient Copayment Field (input)-->
+        <mat-form-field appearance="outline">
+          <mat-label>Copago Paciente</mat-label>
+          <input matInput type="number" formControlName="patient_copayment" />
+          <mat-error
+            *ngIf="seminarInscriptionForm.get('patient_copayment')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+          <!-- <mat-error
+            *ngIf="
+              seminarInscriptionForm
+                .get('patient_copayment')!
+                .hasError('pattern')
+            "
+          >
+            Este campo debe ser un número entero
+          </mat-error> -->
+          <mat-error
+            *ngIf="
+              seminarInscriptionForm.get('patient_copayment')!.hasError('min')
+            "
+          >
+            Este campo debe ser un valor positivo
+          </mat-error>
+        </mat-form-field>
+
+        <!-- HI Copayment Field (input)-->
+        <mat-form-field appearance="outline">
+          <mat-label>Copago O.Social</mat-label>
+          <input matInput type="number" formControlName="hi_copayment" />
+          <mat-error
+            *ngIf="seminarInscriptionForm.get('hi_copayment')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+          <!-- <mat-error
+            *ngIf="
+              seminarInscriptionForm.get('hi_copayment')!.hasError('pattern')
+            "
+          >
+            Este campo debe ser un número entero
+          </mat-error> -->
+          <mat-error
+            *ngIf="seminarInscriptionForm.get('hi_copayment')!.hasError('min')"
+          >
+            Este campo debe ser un valor positivo
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Payment Status Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Estado de Pago </mat-label>
+          <mat-select
+            formControlName="payment_status"
+            (ngModelChange)="updatePaymentVisibility($event)"
+          >
+            <mat-option
+              *ngFor="let pay_status of payment_status_choices"
+              [value]="pay_status.value"
+            >
+              {{ pay_status.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Payment Method Field -->
+        <mat-form-field *ngIf="isPaid" appearance="outline">
+          <mat-label>Metodo de Pago</mat-label>
+          <mat-select formControlName="payment_method">
+            <mat-option [value]="null">Sin Solicitar</mat-option>
+            <mat-option
+              *ngFor="let method of paymentMethods"
+              [value]="method.id"
+            >
+              {{ method.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Button Section -->
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!seminarInscriptionForm.valid"
+        >
+          Guardar
+        </button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

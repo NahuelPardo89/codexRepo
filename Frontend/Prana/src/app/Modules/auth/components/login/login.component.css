@@ -1,0 +1,63 @@
+.container-sm {
+    width: 50%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #ddd; /* Añadir borde */
+    border-radius: 10px; /* Añadir bordes redondeados si deseas */
+    padding: 20px; /* Añadir padding dentro del borde */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añadir sombra para mejor apariencia */
+    background-color: #fff; /* Añadir fondo blanco para contraste */
+}
+
+.container-sm > img {
+    padding: 2rem;
+    width: 60%; /* Ajusta el tamaño del logo */
+    margin: auto;
+}
+
+.container-sm > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.boton-enviar {
+    height: 50px;
+}
+
+
+
+.container-sm > p {
+    margin-top: 15px;
+}
+
+
+
+
+mat-error {
+    font-size: 0.92rem;
+}
+.error-message {
+    color: #F3969A;
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .container-sm {
+        width: 70%;
+               
+    }
+    mat-error {
+        font-size: 0.9rem;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+    .container-sm {
+        width: 100%;
+    }
+
+    mat-error {
+        font-size: 0.87rem;
+    }
+
+}

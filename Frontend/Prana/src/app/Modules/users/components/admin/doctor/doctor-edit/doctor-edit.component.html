@@ -1,0 +1,63 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header bg-info text-white text-center">
+      <h2 class="text-center">Profesional: {{ doctorName }}</h2>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="doctorForm"
+        (ngSubmit)="onSubmit()"
+        class="create-user-form"
+      >
+        <!-- Licence Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Licencia Médica</mat-label>
+          <input matInput formControlName="medicLicence" />
+        </mat-form-field>
+
+        <!-- Campo Spec -->
+        <mat-form-field appearance="outline">
+          <mat-label>Especialidades</mat-label>
+          <mat-select formControlName="specialty">
+            <mat-option
+              *ngFor="let specialty of specialties"
+              [value]="specialty.id"
+            >
+              {{ specialty.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="doctorForm.get('specialty')!.errors?.['required']"
+            >El campo Especialidad es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Campo Duración de Cita -->
+        <mat-form-field appearance="outline">
+          <mat-label>Duración del turno</mat-label>
+          <mat-select formControlName="appointment_duration">
+            <mat-option
+              *ngFor="let option of durationOptions"
+              [value]="option.value"
+            >
+              {{ option.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="doctorForm.get('appointment_duration')!.errors?.['required']"
+            >El campo Duración del turno es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Botón para enviar el formulario -->
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!doctorForm.valid"
+        >
+          Guardar
+        </button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

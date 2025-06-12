@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        width: 90%;
+        max-width: 600px;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+      .header {
+        background-color: #4caf50;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        border-radius: 15px 15px 0 0;
+      }
+      .content {
+        padding: 20px;
+        color: #333;
+        line-height: 1.6;
+      }
+      .content p {
+        margin: 0 0 10px;
+      }
+      .footer {
+        text-align: center;
+        padding: 15px;
+        font-size: 12px;
+        color: #666;
+        border-top: 1px solid #e4e4e4;
+        margin-top: 20px;
+      }
+      .highlight {
+        background-color: #f4f4f4;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: inline-block;
+        margin: 5px 0;
+      }
+      .whatsapp-link {
+        display: inline-block;
+        text-decoration: none;
+        background-color: #25d366;
+        color: white;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+      }
+      .whatsapp-link:hover {
+        background-color: #1eb653;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Turno Centro terapéutico PRANA</h1>
+      </div>
+      <div class="content">
+        <p><strong>Turno generado</strong></p>
+        <p><span class="highlight">Día:</span> <strong>{{ day }}</strong></p>
+        <p><span class="highlight">Hora:</span> <strong>{{ hour }}</strong></p>
+        <p>
+          <span class="highlight">Profesional:</span>
+          <strong>{{ doctor }}</strong>
+        </p>
+        <p>Por favor, no respondas a este correo.</p>
+        <p>
+          Recuerde que, en caso de no asistir a la consulta, sin previo aviso de
+          24 hs, se aplicará el importe correspondiente a la misma.
+        </p>
+        <p>
+          Consultas por WhatsApp:
+          <a
+            href="https://api.whatsapp.com/send/?phone=5493584029619&text&type=phone_number&app_absent=0"
+            class="whatsapp-link"
+          >
+            Iniciar Chat
+          </a>
+        </p>
+      </div>
+      <div class="footer">
+        <p>&copy; Centro Terapéutico PRANA</p>
+      </div>
+    </div>
+  </body>
+</html>

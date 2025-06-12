@@ -1,0 +1,106 @@
+
+<!-- sección portada  -->
+<main >
+  <div class="mainPortada d-flex flex-column justify-content-center align-items-center kenburns-top">
+    
+  </div>
+  
+  <h1 class="slogan text-center">Tu bienestar, nuestra prioridad</h1>
+  
+</main>
+
+  
+  <hr class="separator"> 
+
+
+  <!-- sección navegador del body   -->
+  <section id="bodyNav">
+    <div class="bodyNav">
+      <div class="bodyNav-container" (click)="navigateToAboutUs()">
+        <img src="../../../../../assets/img/profesionales.jpg" alt="fotoPrana">
+        <h2>Especialidades</h2>
+        <p>En Prana contamos con una alta variedad de servicios terapéuticos</p>
+      </div>
+      <div class="bodyNav-container mid" (click)="scrollToSection()">
+        <img src="../../../../../assets/img/ubicación.jpg" alt="celular con ubicación">
+        <h2>¿Dónde estamos?</h2>
+        <p>Podés encontrarnos en la ciudad de Río Cuarto, ¡hacé click para buscarnos!</p>
+      </div>
+      <div class="bodyNav-container" (click)="navigateToProf()">
+        <img src="../../../../../assets/img/profes.jpg" alt="profesionales">
+        <h2>Profesionales</h2>
+        <p>Nuestro equipo de profesionales altamente capacitados te brindarán apoyo, asesoramiento y orientación hacia tu bienestar</p>
+      </div>
+    </div>
+  </section>
+  
+  <hr class="separator">
+  
+    <!-- Swiper Carrousel -->
+        <!-- <swiper-container class="swiper-carrousel" lazy="true" pagination="true" effect="coverflow" grab-cursor="true" centered-slides="true" slides-per-view="auto" 
+        coverflow-effect-rotate="0" coverflow-effect-stretch="0" coverflow-effect-depth="200" coverflow-effect-modifier="1" coverflow-effect-slides-shadows="false">
+        <swiper-slide *ngFor="let img of sliderImages" class="swiper-slide">
+        <img [src]="img" alt="" class="swiper-img">
+        </swiper-slide>
+    
+    </swiper-container> -->
+
+
+  <!-- sección objetivos   -->
+  <section class="objetivos" id="objetivos" [ngClass]="{'slide-in-blurred-bottom': showObjectives, 'hidden': !showObjectives}">
+    <div class="mision">
+      <img src="../../../../../assets/img/Iconos/objetivo64.png" alt="misión de prana">
+      <h3>MISIÓN</h3>
+      <p>Prana es un Centro Terapéutico comprometido con el bienestar integral de las personas.</p>
+    </div>
+    <div class="vision">
+      <img src="../../../../../assets/img/Iconos/vision64.png" alt="visión de prana">
+      <h3>VISIÓN</h3>
+      <p>Somos un equipo de profesionales que sentamos la mirada en el cuidado, sostén y acompañamiento de las personas y sus entornos.</p>
+    </div>
+  </section>
+  
+  <hr class="separator">
+
+
+  <!-- sección ubicación  -->
+
+  <section id="encontrarnos" class="ubicacion-seccion">
+    <div class="contenedor">
+      <div class="info-contacto">
+        <h2>Nuestra Ubicación</h2>
+        <ul class="lista-contacto">
+          <li>
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Falucho 1170 - Río Cuarto</span>
+          </li>
+          <li>
+            <i class="fas fa-clock"></i>
+            <span>Horario: De 08:00 a 20:00hs</span>
+          </li>
+          <li>
+            <i class="fas fa-phone-alt"></i>
+            <a class="telefono" href="tel:+5493584029619">+54-9-358-4029619</a>
+          </li>
+        </ul>
+        <a href="https://wa.me/5493584029619" class="boton-whatsapp" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-whatsapp"></i> Contáctanos por WhatsApp
+        </a>
+      </div>
+      <div class="mapa-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3341.191441751591!2d-64.34427288832568!3d-33.13033477340747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95d2000669c7d7c5%3A0x41361520c7ba5903!2sFalucho%201170%2C%20X5800%20R%C3%ADo%20Cuarto%2C%20C%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1721657271332!5m2!1ses-419!2sar" 
+                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade" class="mapa"></iframe>
+      </div>
+    </div>
+    <div class="instagram-seccion">
+      <h2>Síguenos en Instagram</h2>
+      <p>Entérate de nuestros talleres y novedades</p>
+      <div class="instagram-embed">
+        <iframe src="https://www.instagram.com/prana_terapeutico/embed" 
+                width="100%" height="450" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+      </div>
+    </div>
+  </section>
+  
+  

@@ -1,0 +1,181 @@
+<div
+  class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+>
+  <div class="card">
+    <div class="card-header bg-info text-dark text-center">
+      <h2 class="text-white">Generar Reporte - Profesional</h2>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="reportForm"
+        (ngSubmit)="onSubmit()"
+        class="create-user-form"
+      >
+        <!-- Start Date Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de Inicio</mat-label>
+          <input
+            matInput
+            formControlName="start_date"
+            type="date"
+            id="start_date"
+          />
+          <mat-error
+            *ngIf="reportForm.controls['start_date'].errors?.['required']"
+            >Este campo es requerido</mat-error
+          >
+        </mat-form-field>
+
+        <!-- End Date Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de Fin</mat-label>
+          <input
+            matInput
+            formControlName="end_date"
+            type="date"
+            id="end_date"
+          />
+          <mat-error
+            *ngIf="reportForm.controls['end_date'].errors?.['required']"
+            >Este campo es requerido</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Specialty Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Especialidad (Filtro Opcional)</mat-label>
+          <input
+            matInput
+            [matAutocomplete]="auto"
+            [formControl]="specialtyControl"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [displayWith]="displaySpecialtyFn"
+          >
+            <mat-option [value]="null">Sin Solicitar</mat-option>
+            <mat-option
+              *ngFor="let specialty of specialties"
+              [value]="specialty.id"
+            >
+              {{ specialty.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <!-- Professional Field -->
+        <mat-form-field *ngIf="selectedSpecialty" appearance="outline">
+          <mat-label>Profesional (Filtro Opcional)</mat-label>
+          <input
+            matInput
+            [matAutocomplete]="auto"
+            [formControl]="doctorControl"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [displayWith]="displayDoctorFn"
+          >
+            <mat-option [value]="null">Sin Solicitar</mat-option>
+            <mat-option *ngFor="let doctor of doctors" [value]="doctor">
+              {{ doctor.user }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <!-- Professional Field -->
+        <mat-form-field *ngIf="!selectedSpecialty" appearance="outline">
+          <mat-label>Profesional (Filtro Opcional)</mat-label>
+          <input
+            matInput
+            [matAutocomplete]="auto"
+            [formControl]="doctorControl"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [displayWith]="displayDoctorFn"
+          >
+            <mat-option [value]="null">Sin Solicitar</mat-option>
+            <mat-option *ngFor="let doctor of doctors" [value]="doctor">
+              {{ doctor.user }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <!-- Branch Field -->
+        <mat-form-field *ngIf="selectedSpecialty" appearance="outline">
+          <mat-label>Rama (Filtro Opcional)</mat-label>
+          <mat-select formControlName="branch">
+            <mat-option [value]="null">Sin Solicitar</mat-option>
+            <mat-option *ngFor="let branch of branches" [value]="branch.id">
+              {{ branch.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Patient Field -->
+        <mat-form-field *ngIf="filteredPatients" appearance="outline">
+          <mat-label>Paciente (Filtro Opcional) </mat-label>
+          <input
+            matInput
+            [matAutocomplete]="auto"
+            [formControl]="patientControl"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [displayWith]="displayPatientFn"
+          >
+            <mat-option [value]="null">Sin Solicitar</mat-option>
+            <mat-option
+              *ngFor="let patient of filteredPatients | async"
+              [value]="patient.id"
+            >
+              {{ patient.user }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <!-- Health Insurance Field Field -->
+        <mat-form-field *ngIf="filteredInsurances" appearance="outline">
+          <mat-label>Obra Social (Filtro Opcional) </mat-label>
+          <input
+            matInput
+            [matAutocomplete]="auto"
+            [formControl]="insuranceControl"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [displayWith]="displayInsuranceFn"
+          >
+            <mat-option [value]="null">Sin Solicitar</mat-option>
+            <mat-option
+              *ngFor="let insurance of filteredInsurances | async"
+              [value]="insurance.id"
+            >
+              {{ insurance.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <!-- Payment Method Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Método de Pago (Filtro Opcional)</mat-label>
+          <mat-select formControlName="payment_method">
+            <mat-option [value]="null">Sin Solicitar</mat-option>
+            <mat-option *ngFor="let method of methods" [value]="method.id">
+              {{ method.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Button Section -->
+        <button class="btn btn-primary" type="submit">Generar Reporte</button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

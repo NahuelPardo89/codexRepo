@@ -1,0 +1,237 @@
+<div id="pdfElement">
+<div>
+  <div
+    class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+  >
+    <h1 class="text-white">Métricas</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="d-flex justify-content-start mb-3">
+      <button
+        class="btn btn-success"
+        routerLink="/Dashboard/reports/copayment/appointment/admin/list"
+      >
+        <i class="material-symbols-outlined"></i>Volver
+      </button>
+      <button class="btn btn-secondary" (click)="generatePDF()">generar pdf</button>
+    </div>
+    
+    <div class="table-responsive">
+      <!-- Angular Material Table -->
+      <table mat-table [dataSource]="dataSummarySource" matSort>
+        <!-- Num Appointments Column -->
+        <ng-container matColumnDef="num_appointments">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            N° de Turnos
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.num_appointments }}</td>
+        </ng-container>
+
+        <!-- Num Patients Column -->
+        <ng-container matColumnDef="num_patients">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            N° de Pacientes
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.num_patients }}</td>
+        </ng-container>
+
+        <!-- Num Doctors Column -->
+        <ng-container matColumnDef="num_doctors">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            N° de Profesionales
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.num_doctors }}</td>
+        </ng-container>
+
+        <!-- Particular Column -->
+        <ng-container matColumnDef="num_particular_insurances">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            N° Particulares
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.num_particular_insurances }}
+          </td>
+        </ng-container>
+
+        <!-- Other HI Column -->
+        <ng-container matColumnDef="num_other_insurances">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            N° Otras O.Sociales
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.num_other_insurances }}</td>
+        </ng-container>
+
+        <!-- Patient Copayment Column -->
+        <ng-container matColumnDef="total_patient_copayment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Total Co-Seg Pacientes
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.total_patient_copayment }}
+          </td>
+        </ng-container>
+
+        <!-- Hi Copayment Column -->
+        <ng-container matColumnDef="total_hi_copayment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Total Co-Seg O.Social
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.total_hi_copayment }}</td>
+        </ng-container>
+
+        <!-- Professional Column -->
+        <ng-container matColumnDef="doctor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Profesional</th>
+          <td mat-cell *matCellDef="let row">{{ row.doctor }}</td>
+        </ng-container>
+
+        <!-- Specialty Column -->
+        <ng-container matColumnDef="specialty">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Especialidad
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.specialty }}</td>
+        </ng-container>
+
+        <!-- Branch Column -->
+        <ng-container matColumnDef="branch">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Especialidad
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.branch }}</td>
+        </ng-container>
+
+        <!-- Payment Method Column -->
+        <ng-container matColumnDef="payment_method">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Método de Pago
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.payment_method }}</td>
+        </ng-container>
+
+        <!-- HI Column -->
+        <ng-container matColumnDef="health_insurance">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Obra Social</th>
+          <td mat-cell *matCellDef="let row">{{ row.health_insurance }}</td>
+        </ng-container>
+
+        <!-- Patient Column -->
+        <ng-container matColumnDef="patient">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Paciente</th>
+          <td mat-cell *matCellDef="let row">{{ row.patient }}</td>
+        </ng-container>
+
+        <!-- Row and columns definition -->
+        <tr mat-header-row *matHeaderRowDef="displayedSummaryColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedSummaryColumns"></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div
+    class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+  >
+    <h2 class="">Detalle de Turnos</h2>
+  </div>
+  <div class="container-fluid">
+    <!-- Filter -->
+    <mat-form-field class="example-form-field">
+      <mat-label>Filtro Múltiple</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input />
+    </mat-form-field>
+    <div class="table-responsive">
+      <!-- Angular Material Table -->
+      <table mat-table [dataSource]="dataAppointmentSource" matSort>
+        <!-- Professional Column -->
+        <ng-container matColumnDef="doctor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Profesional</th>
+          <td mat-cell *matCellDef="let row">{{ row.doctor }}</td>
+        </ng-container>
+
+        <!-- Patient Column -->
+        <ng-container matColumnDef="patient">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Paciente</th>
+          <td mat-cell *matCellDef="let row">{{ row.patient }}</td>
+        </ng-container>
+
+        <!-- Branch Column -->
+        <ng-container matColumnDef="branch">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Rama</th>
+          <td mat-cell *matCellDef="let row">{{ row.branch }}</td>
+        </ng-container>
+
+        <!-- Day Column -->
+        <ng-container matColumnDef="day">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Día</th>
+          <td mat-cell *matCellDef="let row">{{ row.day }}</td>
+        </ng-container>
+
+        <!-- Hour Column -->
+        <ng-container matColumnDef="hour">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Hora</th>
+          <td mat-cell *matCellDef="let row">{{ row.hour }}</td>
+        </ng-container>
+
+        <!-- Obra Social Column -->
+        <ng-container matColumnDef="health_insurance">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Obra Social</th>
+          <td mat-cell *matCellDef="let row">{{ row.health_insurance }}</td>
+        </ng-container>
+
+        <!-- Specialty Column -->
+        <ng-container matColumnDef="specialty">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Especialidad
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.specialty }}</td>
+        </ng-container>
+
+        <!-- Patient Copayment Column -->
+        <ng-container matColumnDef="patient_copayment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Copago Paciente
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.patient_copayment }}</td>
+        </ng-container>
+
+        <!-- HI Copayment Column -->
+        <ng-container matColumnDef="hi_copayment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Copago O.Social
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.hi_copayment }}</td>
+        </ng-container>
+
+        <!-- Payment Method Column -->
+        <ng-container matColumnDef="payment_method">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Método de Pago
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.payment_method }}</td>
+        </ng-container>
+
+        <!-- Appointment Status Column -->
+        <ng-container matColumnDef="appointment_status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+          <td mat-cell *matCellDef="let row">{{ row.appointment_status }}</td>
+        </ng-container>
+
+        <!-- Row and columns definition -->
+        <tr mat-header-row *matHeaderRowDef="displayedAppointmentsColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedAppointmentsColumns"
+        ></tr>
+      </table>
+    </div>
+  </div>
+</div>
+    <!-- Paginator -->
+    <mat-paginator
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  
+</div>

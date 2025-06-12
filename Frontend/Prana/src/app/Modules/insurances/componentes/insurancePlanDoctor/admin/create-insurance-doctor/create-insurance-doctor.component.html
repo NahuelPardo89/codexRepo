@@ -1,0 +1,94 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header bg-info text-white text-center">
+      <h2>Agregar Obra Social a Profesional</h2>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="insuranceDoctorForm"
+        (ngSubmit)="onSubmit()"
+        class="create-user-form"
+      >
+      <mat-form-field appearance="outline">
+          <mat-label>Profesional</mat-label>
+          <input
+            matInput
+            [matAutocomplete]="auto"
+            [formControl]="doctorControl"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [displayWith]="displayDoctor"
+          >
+            <mat-option
+              *ngFor="let doctor of filteredDoctor | async"
+              [value]="doctor"
+            >
+              {{ doctor.user }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="insuranceDoctorForm.get('doctor')!.errors?.['required']">El campo Paciente es obligatorio</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Obra Social</mat-label>
+          <mat-select formControlName="insurance">
+            <mat-option
+              *ngFor="let insurance of insurances"
+              [value]="insurance.id"
+            >
+              {{ insurance.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="insuranceDoctorForm.get('insurance')!.errors?.['required']"
+            >El campo Obra Social es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field *ngIf="showBranch" appearance="outline">
+          <mat-label>Rama de Especialidad</mat-label>
+          <mat-select formControlName="branch">
+            <mat-option
+              *ngFor="let branch of branchs"
+              [value]="branch.id"
+            >
+              {{branch.speciality}} - {{ branch.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="insuranceDoctorForm.get('branch')!.errors?.['required']"
+            >El campo Rama de Especialidad es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Cobertura</mat-label>
+          <input matInput type="number" formControlName="price" />
+          <mat-error
+            *ngIf="insuranceDoctorForm.get('price')?.invalid">
+            <span *ngIf="insuranceDoctorForm.get('price')?.errors?.['required']">Cobertura es requerido.</span>
+            <span *ngIf="insuranceDoctorForm.get('price')?.errors?.['max']">El DNI debe tener entre 7 y 9 números, sin puntos ni comas</span>
+            </mat-error
+          >
+          
+          
+        
+          
+        </mat-form-field>
+
+
+
+        <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!insuranceDoctorForm.valid"
+      >
+        Agregar Obra Social
+      </button>
+      <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+    </form>
+  </div>
+</div>
+</div>

@@ -1,0 +1,159 @@
+<div
+  class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+>
+  <div class="card">
+    <div class="card-header bg-info text-dark text-center">
+      <h2>Crear Taller</h2>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="seminarForm"
+        (ngSubmit)="onSubmit()"
+        class="create-user-form"
+      >
+        <!-- Name Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name" />
+          <mat-error *ngIf="seminarForm.get('name')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Month Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Mes</mat-label>
+          <mat-select formControlName="month">
+            <mat-option *ngFor="let month of monthChoices" [value]="month">
+              {{ month }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="seminarForm.get('month')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Year Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Año</mat-label>
+          <input matInput formControlName="year" />
+          <mat-error *ngIf="seminarForm.get('year')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+          <mat-error *ngIf="seminarForm.get('year')!.hasError('pattern')">
+            Este campo debe ser un número entero
+          </mat-error>
+          <mat-error *ngIf="seminarForm.get('year')!.hasError('min')">
+            El año debe ser igual o mayor a 2024
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Schedule Field (Autocomplete)-->
+        <mat-form-field appearance="outline">
+          <mat-label>Horarios</mat-label>
+          <mat-select formControlName="schedule" multiple>
+            <mat-option
+              *ngFor="let schedule of schedules"
+              [value]="schedule.id"
+            >
+              {{ schedule.weekday }} de {{ schedule.start_hour }} a
+              {{ schedule.end_hour }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="seminarForm.get('schedule')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Meeting Number Field (input)-->
+        <mat-form-field appearance="outline">
+          <mat-label>N° de Encuentros</mat-label>
+          <input matInput formControlName="meetingNumber" />
+          <mat-error
+            *ngIf="seminarForm.get('meetingNumber')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+          <mat-error
+            *ngIf="seminarForm.get('meetingNumber')!.hasError('pattern')"
+          >
+            Este campo debe ser un número entero
+          </mat-error>
+          <mat-error *ngIf="seminarForm.get('meetingNumber')!.hasError('min')">
+            El número de encuentros debe ser un valor positivo
+          </mat-error>
+          <mat-error *ngIf="seminarForm.get('meetingNumber')!.hasError('max')">
+            El número de encuentros no puede ser mayor a 30
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Max Inscriptions Field (input)-->
+        <mat-form-field appearance="outline">
+          <mat-label>Cupo</mat-label>
+          <input matInput formControlName="maxInscription" />
+          <mat-error
+            *ngIf="seminarForm.get('maxInscription')!.hasError('pattern')"
+          >
+            Este campo debe ser un número entero
+          </mat-error>
+          <mat-error *ngIf="seminarForm.get('maxInscription')!.hasError('min')">
+            El cupo debe ser un valor positivo
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Price Field (input)-->
+        <mat-form-field appearance="outline">
+          <mat-label>Costo</mat-label>
+          <input matInput formControlName="price" />
+          <mat-error *ngIf="seminarForm.get('price')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+          <mat-error *ngIf="seminarForm.get('price')!.hasError('pattern')">
+            Este campo debe ser un número entero
+          </mat-error>
+          <mat-error *ngIf="seminarForm.get('price')!.hasError('min')">
+            El costo debe ser un valor positivo
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Seminarists Field Select multiple-->
+        <mat-form-field appearance="outline">
+          <mat-label>Talleristas</mat-label>
+          <mat-select formControlName="seminarist" multiple>
+            <mat-option
+              *ngFor="let seminarian of seminarians"
+              [value]="seminarian.id"
+            >
+              {{ seminarian.user }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="seminarForm.get('seminarist')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Rooms Field Select Multiple-->
+        <mat-form-field appearance="outline">
+          <mat-label>Salas</mat-label>
+          <mat-select formControlName="room" multiple>
+            <mat-option *ngFor="let room of rooms" [value]="room.id">
+              {{ room.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="seminarForm.get('room')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Button Section -->
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!seminarForm.valid"
+        >
+          Crear Taller
+        </button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

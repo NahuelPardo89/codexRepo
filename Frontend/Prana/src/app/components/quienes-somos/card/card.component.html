@@ -1,0 +1,11 @@
+<div class="main">
+    <div *ngFor="let especialidad of especialidades" class="card">
+        <img loading="lazy" [src]="especialidad.foto" class="card-image-top" alt="{{especialidad.nombre}}">
+        <div class="card-body">
+            <h3 class="card-title">{{especialidad.nombre}}</h3>
+        <p >{{especialidad.descripcion}}</p>
+        
+        
+        </div>
+    </div>
+</div>

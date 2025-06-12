@@ -1,0 +1,41 @@
+<div class="container mt-3">
+    <div class="card">
+      <div class="card-header bg-info text-white text-center">
+        <h2>Enviar boletin informativo</h2>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="sendNewsletterForm" (ngSubmit)="onSubmit()" class="send-newsletter-form">
+          <!-- Campo Contenido del Texto -->
+          <mat-form-field appearance="outline">
+            <mat-label>Contenido del Texto</mat-label>
+            <textarea matInput formControlName="textContent" rows="5"></textarea>
+            <mat-error *ngIf="sendNewsletterForm.get('textContent')!.errors?.['required']">
+              El contenido del texto es requerido
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Campo URL de Instagram -->
+          <mat-form-field appearance="outline">
+            <mat-label>URL de Instagram</mat-label>
+            <input matInput formControlName="instagramUrl" type="url"/>
+            <mat-error *ngIf="sendNewsletterForm.get('instagramUrl')!.errors?.['required']">
+              La URL de Instagram es requerida
+            </mat-error>
+            <mat-error *ngIf="sendNewsletterForm.get('instagramUrl')!.errors?.['pattern']">
+              Ingrese una URL válida
+            </mat-error>
+          </mat-form-field>
+  
+          <button class="btn btn-primary" type="submit" [disabled]="!sendNewsletterForm.valid || isLoading">
+            Enviar Newsletter
+          </button>
+          <button class="btn btn-secondary" type="button" (click)="onCancel()" [disabled]="isLoading">Cancelar</button>
+  
+          <div *ngIf="isLoading" class="loading-spinner mt-3">
+            <mat-spinner diameter="30"></mat-spinner>
+            <p>Enviando...</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

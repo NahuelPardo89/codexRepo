@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        width: 90%;
+        max-width: 600px;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+      .header {
+        background-color: #4caf50;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        border-radius: 15px 15px 0 0;
+      }
+      .content {
+        padding: 20px;
+        color: #333;
+        line-height: 1.6;
+      }
+      .content p {
+        margin: 0 0 10px;
+      }
+      .footer {
+        text-align: center;
+        padding: 15px;
+        font-size: 12px;
+        color: #666;
+        border-top: 1px solid #e4e4e4;
+        margin-top: 20px;
+      }
+      .highlight {
+        background-color: #f4f4f4;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: inline-block;
+        margin: 5px 0;
+      }
+      .instagram-link {
+        display: inline-block;
+        text-decoration: none;
+        background-color: #e1306c;
+        color: white;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+      }
+      .instagram-link:hover {
+        background-color: #c13584;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Boletín Informativo PRANA</h1>
+      </div>
+      <div class="content">
+        <p>{{ text_content }}</p>
+        <p>Para más información consulta nuestro post en Instagram:</p>
+        <a href="{{ instagram_url }}" class="instagram-link"
+          >Ver en Instagram</a
+        >
+      </div>
+      <div class="footer">
+        <p>&copy; Centro Terapéutico PRANA</p>
+      </div>
+    </div>
+  </body>
+</html>

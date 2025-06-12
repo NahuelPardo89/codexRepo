@@ -1,0 +1,27 @@
+<!-- Staff Section -->
+<!-- Staff Section -->
+<section class="staff" id="staff">
+    <div class="introduccion">
+        
+    <h2 class="nuestrosProfesionales">Un excepcional equipo de profesionales en salud integral en Prana.</h2>
+    <h3 class="subtituloIntro">BIENVENIDOS A NUESTRO EQUIPO DE ESPECIALISTAS Y FACILITADORES</h3>
+    <p class="textIntro">En Prana, nuestro centro integral de salud liderado por la fundadora y psicóloga <b>Romina Rondoletto</b>, te presentamos a nuestro conjunto de expertos.
+        <br>Contamos con <b>profesionales altamente capacitados</b> en diversas áreas, como psicología y psiquiatría <b>para todas las edades</b>, coaching, yoga, nutrición, psicopedagogía y variados talleres.
+        Nuestro equipo está dedicado a ofrecer soluciones adaptadas y efectivas, brindando atención integral para tu bienestar emocional y  físico.
+        <br> No importa tu edad o las dificultades que enfrentes, en <b>Prana</b> encontrarás terapias y servicios diseñados para superar desafíos y <b>promover tu crecimiento personal</b>.</p>
+    </div>
+    <div class="profesionales-container">
+      <div class="profesional-card" *ngFor="let pro of staff">
+        <div class="profesional-imagen-container">
+          <img [src]="pro.img" [alt]="'Foto de ' + pro.name" class="profesional-imagen">
+        </div>
+        <div class="profesional-info">
+          <h3 class="profesional-nombre">{{pro.name}}</h3>
+          <p class="profesional-especialidad">{{pro.title}}</p>
+        </div>
+      </div>
+    </div>
+    
+</section>
+
+

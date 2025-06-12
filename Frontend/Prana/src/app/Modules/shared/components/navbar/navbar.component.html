@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="navigator">
+  <div class="container-fluid">
+    <!-- Logo o nombre de la aplicación -->
+    <a class="navbar-brand" routerLink="/">
+      <img class="logo" src="../../../../../assets/img/logos/Logo Prana Horizontal.png" alt="Logo Prana">
+    </a>
+
+    <!-- Botón para versiones móviles -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Contenido del Navbar -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Botones del lado izquierdo -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="" routerLinkActive="active">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profesionales" routerLinkActive="active">Profesionales</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/aboutus" routerLinkActive="active">Sobre Nosotros</a>
+        </li>
+        <li class="nav-item" *ngIf="isLogged">
+          <a class="nav-link" routerLink="/Dashboard/accounts/myaccount" routerLinkActive="active">Dashboard</a>
+        </li>
+      </ul>
+
+      <div *ngIf="!isLogged">
+        <button class="btn btn-primary" type="button" routerLink="login">
+          <i class="material-symbols-outlined btn-icon">login</i> Iniciar Sesión
+        </button>
+      </div>
+      <!-- Botón de cierre de sesión -->
+      <div *ngIf="isLogged" class="user-info-container">
+        <div class="dropdown">
+          <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="material-symbols-outlined btn-icon">person</i>: {{currentUser?.last_name}}, {{currentUser?.name}}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" (click)="logout()">Cerrar Sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,54 @@
+<div class="container mt-3">
+    <div class="card">
+      <div class="card-header bg-info text-white text-center">
+        <h2>Crear Tallerista</h2>
+      </div>
+      <div class="card-body">
+        <form
+          [formGroup]="seminaristForm"
+          (ngSubmit)="onSubmit()"
+          class="create-user-form"
+        >
+          <!-- Campo Usuario (ID de usuario) -->
+          <mat-form-field appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input
+              matInput
+              [matAutocomplete]="auto"
+              [formControl]="userControl"
+            />
+            <mat-autocomplete
+              autoActiveFirstOption
+              #auto="matAutocomplete"
+              [displayWith]="displayUser"
+            >
+              <mat-option
+                *ngFor="let user of filteredUsers | async"
+                [value]="user"
+              >
+                {{ user.name }}, {{ user.last_name }}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="seminaristForm.get('user')!.errors?.['required']"
+              >El campo Usuario es obligatorio</mat-error
+            >
+          </mat-form-field>
+  
+         
+  
+          
+  
+          <!-- Botones -->
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="!seminaristForm.valid"
+          >
+            Crear Tallerista
+          </button>
+          <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

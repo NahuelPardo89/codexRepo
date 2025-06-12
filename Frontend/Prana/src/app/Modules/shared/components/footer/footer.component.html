@@ -1,0 +1,53 @@
+<footer class="pt-3">
+  <div class="container" style="max-width: 90%;">
+    <div class="row">
+      <div class="col-12 col-md-3 mb-3">
+        <img src="../../../../../assets/img/logoNuevoVertical.png" alt="Company Logo" class="img-fluid" style="width: 70%; height: auto;">
+      </div>
+
+      <div class="col-12 col-md-3 mb-3">
+        <h5>Síguenos en nuestras redes</h5>
+        <ul class="nav flex-column mt-3">
+          <li class="mb-3">
+            <a class="no-underline d-flex align-items-center" href="https://www.instagram.com/prana_terapeutico/?hl=es-la">
+              <i class="fab fa-instagram fa-2x"></i> 
+              <span class="social-text">Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a class="no-underline d-flex align-items-center" href="https://www.facebook.com/pranacentrointegralrioiv/">
+              <i class="fab fa-facebook fa-2x"></i>
+              <span class="social-text">Facebook</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-4 offset-md-1 mb-3">
+        <form [formGroup]="newsletterForm" (ngSubmit)="onSubmit()">
+          <h5>Suscríbete para recibir información</h5>
+          <p>sobre nuestros talleres, promociones y mucho más</p>
+          <div class="d-flex w-100 gap-2">
+            <label for="newsletter1" class="visually-hidden">Email</label>
+            <input id="newsletter1" type="text" class="form-control" formControlName="email" placeholder="Dirección de Email">
+            <button class="btn btn-primary" type="submit" [disabled]="newsletterForm.invalid">Suscribirse</button>
+          </div>
+          <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger mt-2">
+            <div *ngIf="email?.errors?.['required']">El email es requerido.</div>
+            <div *ngIf="email?.errors?.['email']">El email debe ser válido.</div>
+          </div>
+          <div *ngIf="successMessage" class="text-success mt-2">
+            {{ successMessage }}
+          </div>
+          <div *ngIf="errorMessage" class="text-danger mt-2">
+            {{ errorMessage }}
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="text-center border-top pt-3">
+      <p>© 2023 Devcord, todos los derechos reservados</p>
+    </div>
+  </div>
+</footer>

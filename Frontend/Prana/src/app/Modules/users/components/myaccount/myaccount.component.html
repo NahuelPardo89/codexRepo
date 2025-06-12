@@ -1,0 +1,88 @@
+<div class="container-fluid">
+  <div class="title bg-info text-center border border-dark rounded-top mb-4">
+    <h1 class="text-white">Mi cuenta</h1>
+  </div>
+  <button class="btn btn-primary large" (click)="showUserdata()">
+    Datos de usuario
+  </button>
+  <mat-list *ngIf="showUser">
+    <mat-list-item>
+      <span matListItemTitle>DNI</span>
+      <span matListItemLine>{{ user.dni }}</span>
+    </mat-list-item>
+    <mat-list-item>
+      <span matListItemTitle>APELLIDO</span>
+      <span>{{ user.last_name }}</span>
+    </mat-list-item>
+    <mat-list-item>
+      <span matListItemTitle>NOMBRE</span>
+      <span>{{ user.name }}</span>
+    </mat-list-item>
+    <mat-list-item>
+      <span matListItemTitle>EMAIL</span>
+      <span>{{ user.email }}</span>
+    </mat-list-item>
+    <mat-list-item>
+      <span matListItemTitle>TELÉFONO</span>
+      <span>{{ user.phone }}</span>
+    </mat-list-item>
+    <button class="btn btn-secondary me-2" (click)="editUser(user)">
+      Editar datos
+    </button>
+    <button class="btn btn-secondary" (click)="editpassword()">
+      Cambiar Contraseña
+    </button>
+  </mat-list>
+
+  <button class="btn btn-primary mt-2 large" (click)="showPatientdata()">
+    Perfil de Paciente
+  </button>
+  <mat-list *ngIf="showPatient">
+    <mat-list-item>
+      <span matListItemTitle>FACEBOOK</span>
+      <span matListItemLine>{{ patient.facebook }}</span>
+    </mat-list-item>
+    <mat-list-item>
+      <span matListItemTitle>INSTAGRAM</span>
+      <span>{{ patient.instagram }}</span>
+    </mat-list-item>
+    <mat-list-item>
+      <span matListItemTitle>DIRECCIÓN</span>
+      <span>{{ patient.address }}</span>
+    </mat-list-item>
+
+    <button class="btn btn-secondary" (click)="editPatient(patient)">
+      Editar datos
+    </button>
+  </mat-list>
+
+  <button
+    class="btn btn-primary mt-2 large"
+    (click)="showDoctordata()"
+    *ngIf="hasDoctorProfile"
+  >
+    Perfil de Profesional
+  </button>
+  <mat-list *ngIf="showDoctor">
+    <mat-list-item>
+      <span matListItemTitle>LICENCIA MÉDICA</span>
+      <span matListItemLine>{{ doctor.medicLicence }}</span>
+    </mat-list-item>
+    <mat-list-item>
+      <span matListItemTitle>ESPECIALIDAD</span>
+      <span>{{ doctor.specialty }}</span>
+    </mat-list-item>
+    <mat-list-item>
+      <span matListItemTitle>DURACIÓN DEL TURNO</span>
+      <span>{{ doctor.appointment_duration }}</span>
+    </mat-list-item>
+    <!-- <mat-list-item>
+      <span matListItemTitle>Costo del Coseguro</span>
+      <span>{{ doctor.copayment }}</span>
+    </mat-list-item> -->
+
+    <button class="btn btn-secondary" (click)="editDoctor(doctor)">
+      Editar datos
+    </button>
+  </mat-list>
+</div>

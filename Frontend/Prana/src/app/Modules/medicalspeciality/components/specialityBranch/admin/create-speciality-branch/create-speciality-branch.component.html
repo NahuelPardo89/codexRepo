@@ -1,0 +1,50 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header bg-info text-white text-center">
+      <h2>Crear Rama de Especialidad</h2>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="branchForm"
+        (ngSubmit)="onSubmit()"
+        class="create-user-form"
+      >
+        <!-- Campo Licencia Médica -->
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name" />
+          <mat-error *ngIf="branchForm.get('name')!.errors?.['required']"
+            >El campo nombre es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Campo Especialidades -->
+        <mat-form-field appearance="outline">
+          <mat-label>Especialidades</mat-label>
+          <mat-select formControlName="speciality">
+            <mat-option
+              *ngFor="let specialty of specialties"
+              [value]="specialty.id"
+            >
+              {{ specialty.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="branchForm.get('speciality')!.errors?.['required']"
+            >El campo Especialidad es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Campo Duración de Cita -->
+        <!-- Botones -->
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!branchForm.valid"
+        >
+          Crear Rama
+        </button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

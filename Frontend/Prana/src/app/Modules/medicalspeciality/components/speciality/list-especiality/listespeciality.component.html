@@ -1,0 +1,107 @@
+<div class="container-fluid">
+  <div class="title bg-info text-center border border-dark rounded-top mb-4">
+    <h1 class="text-white">Especialidades</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-success" routerLink="create">
+        <i class="material-symbols-outlined btn-icon">medical_services</i>
+        Agregar Especialidad
+      </button>
+    </div>
+
+    <!-- Campo de filtrado -->
+    <mat-form-field appearance="outline" class="example-form-field">
+      <mat-label>Filtrar por Nombre</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input />
+    </mat-form-field>
+    <!-- Tabla de Angular Material -->
+    <!-- Checkbox para mostrar/ocultar elementos inactivos -->
+    <div class="form-check mb-3">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="showInactive"
+        [(ngModel)]="showInactive"
+        (change)="onShowInactiveChange()"
+      />
+      <label class="form-check-label" for="showInactive">
+        Mostrar desactivadas
+      </label>
+    </div>
+    <!-- Checkbox para mostrar/ocultar elementos inactivos -->
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Columna DNI -->
+        <!-- <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>id</th>
+          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+        </ng-container> -->
+
+        <!-- Columna Nombre -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="is_active">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Activo</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.is_active ? "Sí" : "No" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <!-- Botones cuando el usuario está activo -->
+            <ng-container *ngIf="row.is_active; else activateUserTemplate">
+              <button
+                class="btn btn-primary me-2 shadow"
+                aria-label="Editar especialidad"
+                (click)="especialityEdit(row)"
+              >
+                <i class="material-symbols-outlined">edit</i>
+              </button>
+              <button
+                class="btn btn-danger me-2 shadow"
+                aria-label="Eliminar especialidad"
+                (click)="especialityDelete(row.id)"
+              >
+                <i class="material-symbols-outlined">delete</i>
+              </button>
+            </ng-container>
+
+            <!-- Plantilla para cuando el usuario no está activo -->
+            <ng-template #activateUserTemplate>
+              <button
+                class="btn btn-success me-2 shadow d-flex align-items-center justify-content-center"
+                aria-label="Activar especialidad"
+                (click)="activeEspeciality(row)"
+              >
+                <i class="material-symbols-outlined me-1 d-none d-sm-inline"
+                  >check_circle</i
+                >Activar
+              </button>
+            </ng-template>
+          </td>
+        </ng-container>
+
+        <!-- Encabezado de la tabla y filas -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          [class.bg-danger]="!row.is_active"
+        ></tr>
+      </table>
+    </div>
+
+    <!-- Paginador -->
+    <mat-paginator
+      [pageSizeOptions]="[10, 20, 50, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

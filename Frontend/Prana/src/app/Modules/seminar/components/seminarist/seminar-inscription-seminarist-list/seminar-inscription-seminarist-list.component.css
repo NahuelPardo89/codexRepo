@@ -1,0 +1,20 @@
+.example-form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Estilos personalizados para la tabla */
+.mat-elevation-z8 {
+  background-color: #f5f5f5;
+}
+
+button {
+  min-height: 20px;
+  text-align: middle;
+  vertical-align: middle;
+}
+
+.material-icons {
+  margin-right: 10px;
+  vertical-align: middle;
+}

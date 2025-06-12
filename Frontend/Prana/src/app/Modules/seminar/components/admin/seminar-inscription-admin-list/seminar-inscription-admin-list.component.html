@@ -1,0 +1,119 @@
+<div>
+  <div
+    class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+  >
+    <h1 class="text-white">Inscripciones - Administrador</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="d-flex justify-content-start mb-3">
+      <button class="btn btn-success" (click)="addParticipant(currentSeminar)">
+        <i class="material-symbols-outlined"></i>Agregar Participante
+      </button>
+    </div>
+    <!-- Filter -->
+    <mat-form-field class="example-form-field">
+      <mat-label>Filtro Múltiple</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input />
+    </mat-form-field>
+    <div class="table-responsive">
+      <!-- Angular Material Table -->
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Seminar Column -->
+        <ng-container matColumnDef="seminar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Taller</th>
+          <td mat-cell *matCellDef="let row">{{ row.seminar }}</td>
+        </ng-container>
+
+        <!-- Patient Column -->
+        <ng-container matColumnDef="patient">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Participante
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.patient }}</td>
+        </ng-container>
+
+        <!-- Seminar Status Column -->
+        <ng-container matColumnDef="seminar_status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+          <td mat-cell *matCellDef="let row">{{ row.seminar_status }}</td>
+        </ng-container>
+
+        <!-- Meeting Number Column -->
+        <ng-container matColumnDef="meetingNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Encuentros</th>
+          <td mat-cell *matCellDef="let row">{{ row.meetingNumber }}</td>
+        </ng-container>
+
+        <!-- Insurance Hora -->
+        <ng-container matColumnDef="insurance">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>O.Social</th>
+          <td mat-cell *matCellDef="let row">{{ row.insurance }}</td>
+        </ng-container>
+
+        <!-- Patient Copayment Column -->
+        <ng-container matColumnDef="patient_copayment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Copago Participante
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.patient_copayment }}</td>
+        </ng-container>
+
+        <!-- Hi Copayment Column -->
+        <ng-container matColumnDef="hi_copayment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Copago O.Social
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.hi_copayment }}</td>
+        </ng-container>
+
+        <!-- Payment Status Column -->
+        <ng-container matColumnDef="payment_status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Estado de Pago
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.payment_status }}</td>
+        </ng-container>
+
+        <!-- Payment Method Column -->
+        <ng-container matColumnDef="payment_method">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Método de Pago
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.payment_method }}</td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <div style="display: flex">
+              <button
+                class="btn btn-primary"
+                aria-label="Editar turno"
+                (click)="onEdit(row)"
+              >
+                <i class="material-symbols-outlined">edit</i>
+              </button>
+              <button
+                class="btn btn-danger ms-3"
+                aria-label="Eliminar turno"
+                (click)="onDelete(row.id)"
+              >
+                <i class="material-symbols-outlined">delete</i>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Row and columns definition -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <!-- Paginator -->
+    <mat-paginator
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

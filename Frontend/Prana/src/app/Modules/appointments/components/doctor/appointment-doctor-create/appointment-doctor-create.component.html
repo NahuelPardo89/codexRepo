@@ -1,0 +1,236 @@
+<div
+  class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+>
+  <div class="card">
+    <div class="card-header bg-info text-dark text-center">
+      <h2 class="text-white">Crear Turno - Profesional</h2>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="appointmentForm"
+        (ngSubmit)="onSubmit()"
+        class="create-user-form"
+      >
+        <!-- Patient Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Paciente</mat-label>
+          <input
+            matInput
+            [matAutocomplete]="auto"
+            [formControl]="patientControl"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [displayWith]="displayPatientFn"
+            (optionSelected)="onPatientSelect($event.option.value)"
+          >
+            <mat-option
+              *ngFor="let patient of filteredPatients | async"
+              [value]="patient.id"
+            >
+              {{ patient.user }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <!-- Specialty Field -->
+        <mat-form-field *ngIf="selectedSpecialty" appearance="outline">
+          <mat-label>Especialidad</mat-label>
+          <input
+            matInput
+            [matAutocomplete]="auto"
+            [formControl]="specialtyControl"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [displayWith]="displaySpecialtyFn"
+          >
+            <mat-option [value]="null">Sin Solicitar</mat-option>
+            <mat-option
+              *ngFor="let specialty of specialties"
+              [value]="specialty.name"
+            >
+              {{ specialty.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <!-- Professional Field -->
+        <mat-form-field *ngIf="selectedSpecialty" appearance="outline">
+          <mat-label>Profesional</mat-label>
+          <input
+            matInput
+            [matAutocomplete]="auto"
+            [formControl]="doctorControl"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [displayWith]="displayDoctorFn"
+          >
+            <mat-option *ngFor="let doctor of doctors" [value]="doctor.id">
+              {{ doctor.user }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <!-- Day Field -->
+        <mat-form-field *ngIf="selectedDoctor" appearance="outline">
+          <mat-label>Día</mat-label>
+          <mat-select
+            formControlName="day"
+            (ngModelChange)="onDaySelect($event)"
+          >
+            <mat-option [value]="">Selecciona un Día</mat-option>
+            <mat-option *ngFor="let day of formattedDates" [value]="day">
+              {{ day }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="appointmentForm.controls['day'].errors?.['required']"
+            >Este campo es requerido</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Hour Field -->
+        <mat-form-field *ngIf="selectedDoctor" appearance="outline">
+          <mat-label>Hora</mat-label>
+          <mat-select
+            formControlName="hour"
+            (ngModelChange)="onHourSelect($event)"
+          >
+            <mat-option [value]="">Selecciona un Horario</mat-option>
+            <mat-option *ngFor="let hour of availableTimes" [value]="hour">
+              {{ hour }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="appointmentForm.controls['hour'].errors?.['required']"
+            >Este campo es requerido</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Branch Field -->
+        <mat-form-field *ngIf="selectedDoctor" appearance="outline">
+          <mat-label>Rama</mat-label>
+          <mat-select
+            formControlName="branch"
+            (ngModelChange)="onBranchSelect($event)"
+          >
+            <mat-option
+              *ngFor="let branch of specialtyFilteredBranches"
+              [value]="branch.id"
+            >
+              {{ branch.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="appointmentForm.controls['branch'].errors?.['required']"
+            >Este campo es requerido</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Health Insurance Field -->
+        <mat-form-field
+          *ngIf="selectedBranch && selectedDoctor && selectedPatient"
+          appearance="outline"
+        >
+          <mat-label>Obra Social (Opcional)</mat-label>
+          <mat-select formControlName="health_insurance">
+            <mat-option [value]="null">Sin Solicitar</mat-option>
+            <mat-option
+              *ngFor="let insurance of insurances"
+              [value]="insurance.id"
+            >
+              {{ insurance.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Patient Copayment Field -->
+        <mat-form-field
+          *ngIf="selectedSpecialty && selectedDoctor"
+          appearance="outline"
+        >
+          <mat-label>Coseguro Paciente (Opcional)</mat-label>
+          <input
+            matInput
+            formControlName="patient_copayment"
+            type="number"
+            id="patient_copayment"
+          />
+          <mat-error
+            *ngIf="appointmentForm.get('patient_copayment')!.hasError('min')"
+          >
+            El coseguro no puede ser un valor negativo
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Appointment Type Field -->
+        <mat-form-field
+          *ngIf="selectedSpecialty && selectedDoctor"
+          appearance="outline"
+        >
+          <mat-label>Tipo de Encuentro (Opcional)</mat-label>
+          <mat-select formControlName="appointment_type">
+            <mat-option [value]="1">Sin Solicitar</mat-option>
+            <mat-option
+              *ngFor="let app_type of appointment_type_choices"
+              [value]="app_type.value"
+            >
+              {{ app_type.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Appointment Status Field -->
+        <mat-form-field *ngIf="selectedDoctor" appearance="outline">
+          <mat-label>Estado del Turno (Opcional)</mat-label>
+          <mat-select formControlName="appointment_status">
+            <mat-option [value]="1">Sin Solicitar</mat-option>
+            <mat-option
+              *ngFor="let app_status of appointment_status_choices"
+              [value]="app_status.value"
+            >
+              {{ app_status.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Payment Status Field -->
+        <mat-form-field *ngIf="selectedDoctor" appearance="outline">
+          <mat-label>Estado de Pago (Opcional)</mat-label>
+          <mat-select
+            formControlName="payment_status"
+            (ngModelChange)="updatePaymentVisibility($event)"
+          >
+            <mat-option [value]="1">Sin Solicitar</mat-option>
+            <mat-option
+              *ngFor="let pay_status of payment_status_choices"
+              [value]="pay_status.value"
+            >
+              {{ pay_status.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Payment Method Field -->
+        <mat-form-field *ngIf="isPaid && selectedDoctor" appearance="outline">
+          <mat-label>Método de Pago</mat-label>
+          <mat-select formControlName="payment_method">
+            <mat-option [value]="null">Sin Solicitar</mat-option>
+            <mat-option *ngFor="let method of methods" [value]="method.id">
+              {{ method.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Button Section -->
+        <button class="btn btn-primary" type="submit">Crear</button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

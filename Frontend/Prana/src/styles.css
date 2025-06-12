@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Open+Sans&family=Pridi:wght@300&display=swap');
+
+
+/* titles white font lora */
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: roboto , "Helvetica Neue", sans-serif;
+    background-color: #f9f9f9;
+}
+
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+  
+.body-content {
+    flex: 1;
+}
+html, body { height: 100%; }
+

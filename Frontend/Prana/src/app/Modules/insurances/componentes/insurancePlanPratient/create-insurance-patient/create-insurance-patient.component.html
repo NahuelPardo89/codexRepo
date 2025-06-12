@@ -1,0 +1,69 @@
+<div class="container mt-3">
+    <div class="card">
+      <div class="card-header bg-info text-white text-center">
+        <h2>Agregar Obra Social a Paciente</h2>
+      </div>
+      <div class="card-body">
+        <form
+          [formGroup]="insurancePatientForm"
+          (ngSubmit)="onSubmit()"
+          class="create-user-form"
+        >
+        <mat-form-field appearance="outline">
+            <mat-label>Paciente</mat-label>
+            <input
+              matInput
+              [matAutocomplete]="auto"
+              [formControl]="patientControl"
+            />
+            <mat-autocomplete
+              autoActiveFirstOption
+              #auto="matAutocomplete"
+              [displayWith]="displayPatient"
+            >
+              <mat-option
+                *ngFor="let patient of filteredPatient | async"
+                [value]="patient"
+              >
+                {{ patient.user }}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="insurancePatientForm.get('patient')!.errors?.['required']">El campo Paciente es obligatorio</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Obra Social</mat-label>
+            <mat-select formControlName="insurance">
+              <mat-option
+                *ngFor="let insurance of insurances"
+                [value]="insurance.id"
+              >
+                {{ insurance.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="insurancePatientForm.get('insurance')!.errors?.['required']"
+              >El campo Obra Social es obligatorio</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>N° Afiliado</mat-label>
+            <input matInput formControlName="code" />
+            
+          </mat-form-field>
+  
+  
+
+          <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!insurancePatientForm.valid"
+        >
+          Agregar Obra Social
+        </button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

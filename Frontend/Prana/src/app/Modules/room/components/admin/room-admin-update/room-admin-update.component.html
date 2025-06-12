@@ -1,0 +1,64 @@
+<div
+  class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+>
+  <div class="card">
+    <div class="card-header bg-info text-dark text-center">
+      <h2 class="text-white">Editar Sala: {{ roomForm.get("name")?.value }}</h2>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="roomForm"
+        (ngSubmit)="onSubmit()"
+        class="create-user-form"
+      >
+        <!-- Name Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name" />
+          <mat-error *ngIf="roomForm.get('name')!.errors?.['required']">
+            Este campo es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Capacity Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Capacidad</mat-label>
+          <input matInput formControlName="capacity" />
+          <mat-error *ngIf="roomForm.get('capacity')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+          <mat-error *ngIf="roomForm.get('capacity')!.errors?.['notInteger']"
+            >Este campo debe ser un número entero
+          </mat-error>
+          <mat-error
+            *ngIf="roomForm.get('capacity')!.errors?.['notPositiveInteger']"
+            >El número debe ser positivo
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Cost Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Costo</mat-label>
+          <input matInput formControlName="cost" />
+          <mat-error *ngIf="roomForm.get('cost')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+          <mat-error
+            *ngIf="roomForm.get('cost')!.value && roomForm.get('cost')!.errors?.['notPositiveInteger']"
+            >El número debe ser positivo y entero
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Button Section -->
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!roomForm.valid"
+        >
+          Guardar
+        </button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

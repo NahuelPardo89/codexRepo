@@ -1,0 +1,71 @@
+<div
+  class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+>
+  <div class="card">
+    <div class="card-header bg-info text-dark text-center">
+      <h2 class="text-white">Crear Horario</h2>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="scheduleForm"
+        (ngSubmit)="onSubmit()"
+        class="create-user-form"
+      >
+        <!-- Weekday Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Día</mat-label>
+          <mat-select formControlName="weekday">
+            <mat-option
+              *ngFor="let weekday of weekdayOptions"
+              [value]="weekday"
+            >
+              {{ weekday }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="scheduleForm.get('weekday')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Start Hour Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Hora de Inicio</mat-label>
+          <input matInput formControlName="start_hour" />
+          <mat-error
+            *ngIf="scheduleForm.get('start_hour')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+          <mat-error
+            *ngIf="scheduleForm.get('start_hour')!.value && scheduleForm.get('start_hour')!.errors?.['invalidTime']"
+            >Formato de tiempo invalido. Por favor ingrese un formato válido
+            (HH:mm).
+          </mat-error>
+        </mat-form-field>
+
+        <!-- End Hour Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Hora de Finalización</mat-label>
+          <input matInput formControlName="end_hour" />
+          <mat-error *ngIf="scheduleForm.get('end_hour')!.errors?.['required']"
+            >Este campo es obligatorio</mat-error
+          >
+          <mat-error
+            *ngIf="scheduleForm.get('end_hour')!.value && scheduleForm.get('end_hour')!.errors?.['invalidTime']"
+            >Formato de tiempo invalido. Por favor ingrese un formato válido
+            (HH:mm).
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Button Section -->
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!scheduleForm.valid"
+        >
+          Crear Horario
+        </button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container mt-3">
+    <div class="card">
+      <div class="card-header bg-info text-white ">
+        <h2 class="text-center">Editar Obra Social de : {{doctorName}} </h2>
+        
+      </div>
+      <div class="card-body">
+        <h5>Obra Social: {{insuranceName}}</h5>
+        <h5 class="mb-4">Rama: {{branchName}}</h5>
+        <form
+          [formGroup]="insuranceDoctorForm"
+          (ngSubmit)="onSubmit()"
+          class="create-user-form"
+        >
+        <mat-form-field appearance="outline">
+            <mat-label>Cobertura</mat-label>
+            <input matInput type="number" formControlName="price" />
+            <mat-error
+            *ngIf="insuranceDoctorForm.get('price')?.invalid">
+            <span *ngIf="insuranceDoctorForm.get('price')?.errors?.['required']">Cobertura es requerido.</span>
+            <span *ngIf="insuranceDoctorForm.get('price')?.errors?.['min']">debe ingresar un número positivo </span>
+            </mat-error
+          >
+            
+          </mat-form-field>
+  
+  
+
+          <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!insuranceDoctorForm.valid"
+        >
+          Guardar
+        </button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+

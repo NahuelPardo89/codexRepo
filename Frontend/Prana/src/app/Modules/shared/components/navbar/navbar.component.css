@@ -1,0 +1,48 @@
+#navigator {
+    background-color: #f9f9f9;
+    width: 100%;
+    margin: auto;
+  }
+  
+  .logo {
+    width: 150px;
+    margin-right: 15px;
+  }
+  
+  .nav-item > a {
+    font-size: 1.2rem;
+    color: #333; /* Color inicial del enlace */
+    font-family: 'Arial', sans-serif; /* Tipografía del enlace */
+    transition: color 0.3s ease; /* Transición para el cambio de color */
+  }
+  
+  .nav-item > a:hover {
+    color: #007bff; /* Color al pasar el ratón por encima */
+  }
+  
+  .nav-item > a.active {
+    color: #0056b3; /* Color del enlace activo */
+    font-weight: bold;
+  }
+  
+  .btn-icon {
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  .user-info-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  @media screen and (max-width: 991px) {
+    #navbarNav {
+      background-color: #f9f9f9;
+      z-index: 500;
+      padding: 20px;
+      border-radius: 14px;
+    }
+    .nav-link {
+      border-bottom: 1px solid #78c2ad;
+    }
+  }

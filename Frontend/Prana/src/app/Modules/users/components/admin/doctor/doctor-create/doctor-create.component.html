@@ -1,0 +1,92 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header bg-info text-white text-center">
+      <h2>Crear Profesional</h2>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="doctorForm"
+        (ngSubmit)="onSubmit()"
+        class="create-user-form"
+      >
+        <!-- Campo Usuario (ID de usuario) -->
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input
+            matInput
+            [matAutocomplete]="auto"
+            [formControl]="userControl"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [displayWith]="displayUser"
+          >
+            <mat-option
+              *ngFor="let user of filteredUsers | async"
+              [value]="user"
+            >
+              {{ user.name }}, {{ user.last_name }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="doctorForm.get('user')!.errors?.['required']"
+            >El campo Usuario es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Campo Licencia Médica -->
+        <mat-form-field appearance="outline">
+          <mat-label>Licencia Médica</mat-label>
+          <input matInput formControlName="medicLicence" />
+          <mat-error
+            *ngIf="doctorForm.get('medicLicence')!.errors?.['required']"
+            >El campo Licencia Médica es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Campo Especialidades -->
+        <mat-form-field appearance="outline">
+          <mat-label>Especialidades</mat-label>
+          <mat-select formControlName="specialty">
+            <mat-option
+              *ngFor="let specialty of specialties"
+              [value]="specialty.id"
+            >
+              {{ specialty.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="doctorForm.get('specialty')!.errors?.['required']"
+            >El campo Especialidad es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Campo Duración de Cita -->
+        <mat-form-field appearance="outline">
+          <mat-label>Duración del turno</mat-label>
+          <mat-select formControlName="appointment_duration">
+            <mat-option
+              *ngFor="let option of durationOptions"
+              [value]="option.value"
+            >
+              {{ option.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="doctorForm.get('appointment_duration')!.errors?.['required']"
+            >El campo Duración del turno es obligatorio</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Botones -->
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!doctorForm.valid"
+        >
+          Crear Profesional
+        </button>
+        <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

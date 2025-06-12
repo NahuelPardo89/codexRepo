@@ -1,0 +1,101 @@
+<div>
+  <div
+    class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+  >
+    <h1 class="text-white">Talleres - Paciente</h1>
+  </div>
+  <div class="container-fluid">
+    <!-- Filter -->
+    <mat-form-field class="example-form-field">
+      <mat-label>Filtro Múltiple</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input />
+    </mat-form-field>
+    <div class="table-responsive">
+      <!-- Angular Material Table -->
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        </ng-container>
+
+        <!-- Year Column -->
+        <ng-container matColumnDef="year">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Año</th>
+          <td mat-cell *matCellDef="let row">{{ row.year }}</td>
+        </ng-container>
+
+        <!-- Month Column -->
+        <ng-container matColumnDef="month">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mes</th>
+          <td mat-cell *matCellDef="let row">{{ row.month }}</td>
+        </ng-container>
+
+        <!-- Schedule Column -->
+        <ng-container matColumnDef="schedule">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Días y Horarios
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.schedule.join(" - ") }}</td>
+        </ng-container>
+
+        <!-- Mettings Number Column -->
+        <ng-container matColumnDef="meetingNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Encuentros</th>
+          <td mat-cell *matCellDef="let row">{{ row.meetingNumber }}</td>
+        </ng-container>
+
+        <!-- Max Inscription Column -->
+        <ng-container matColumnDef="maxInscription">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cupo</th>
+          <td mat-cell *matCellDef="let row">{{ row.maxInscription }}</td>
+        </ng-container>
+
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
+          <td mat-cell *matCellDef="let row">{{ row.price }}</td>
+        </ng-container>
+
+        <!-- Seminarist Column -->
+        <ng-container matColumnDef="seminarist">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Talleristas</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.seminarist.join(" - ") }}
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <div style="display: flex">
+              <button
+                class="btn btn-success"
+                aria-label="Inscribirse"
+                (click)="onRegister(row)"
+                style="
+                  width: 80px;
+                  height: 50px;
+                  font-size: 11px;
+                  margin: 5px 0;
+                "
+              >
+                <i class="material-symbols-outlined">create</i> Inscribirse
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Row and columns definition -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <!-- Paginator -->
+    <mat-paginator
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

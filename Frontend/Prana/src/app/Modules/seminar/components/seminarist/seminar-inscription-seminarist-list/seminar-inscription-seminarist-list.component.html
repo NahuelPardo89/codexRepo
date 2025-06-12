@@ -1,0 +1,53 @@
+<div>
+  <div
+    class="title bg-info text-center text-bold border border-dark rounded-top mb-4"
+  >
+    <h1 class="text-white">Visualizar Inscripciones</h1>
+  </div>
+  <div class="container-fluid">
+    <!-- Filter -->
+    <mat-form-field class="example-form-field">
+      <mat-label>Filtro Múltiple</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input />
+    </mat-form-field>
+    <div class="table-responsive">
+      <!-- Angular Material Table -->
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Seminar Column -->
+        <ng-container matColumnDef="seminar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Taller</th>
+          <td mat-cell *matCellDef="let row">{{ row.seminar }}</td>
+        </ng-container>
+
+        <!-- Patient Column -->
+        <ng-container matColumnDef="patient">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Participante
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.patient }}</td>
+        </ng-container>
+
+        <!-- Seminar Status Column -->
+        <ng-container matColumnDef="seminar_status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+          <td mat-cell *matCellDef="let row">{{ row.seminar_status }}</td>
+        </ng-container>
+
+        <!-- Meeting Number Column -->
+        <ng-container matColumnDef="meetingNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Encuentros</th>
+          <td mat-cell *matCellDef="let row">{{ row.meetingNumber }}</td>
+        </ng-container>
+
+        <!-- Row and columns definition -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <!-- Paginator -->
+    <mat-paginator
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>
