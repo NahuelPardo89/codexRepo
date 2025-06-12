@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NewletterService } from 'src/app/Services/newletter/newletter.service';
+import { NewsletterService } from 'src/app/Services/newsletter/newsletter.service';
 
 @Component({
   selector: 'app-footer',
@@ -13,7 +13,7 @@ export class FooterComponent implements OnInit {
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private fb: FormBuilder,private newsletterService: NewletterService) {
+  constructor(private fb: FormBuilder,private newsletterService: NewsletterService) {
     this.newsletterForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
     });
