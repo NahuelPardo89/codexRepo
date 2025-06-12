@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 
 import { tap, catchError } from 'rxjs/operators';
 import { HealthInsurance } from '../../../../Models/Profile/healthinsurance.interface';
-import { environment } from 'src/enviroments/environment';
+import { environment } from 'src/environments/environment';
 
 
 

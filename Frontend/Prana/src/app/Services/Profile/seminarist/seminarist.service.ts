@@ -5,7 +5,7 @@ import {
   SeminaristProfileDisplayInterface,
   SeminaristProfileFlatInterface,
 } from 'src/app/Models/Profile/seminaristProfile.interface';
-import { environment } from 'src/enviroments/environment';
+import { environment } from 'src/environments/environment';
 
 /**
  * Service for handling operations related to seminarists' profiles.

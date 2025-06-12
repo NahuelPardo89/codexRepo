@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DoctorScheduleInterface } from 'src/app/Models/Profile/doctorschedule.interface';
 import { DoctorAvailableTimes } from 'src/app/Models/appointments/doctor-availables-times/appointmentAdmin.interface';
-import { environment } from 'src/enviroments/environment';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
