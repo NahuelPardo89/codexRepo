@@ -3,6 +3,9 @@ import string
 import secrets
 from django.contrib.auth import get_user_model
 from rest_framework import status
+import logging
+
+logger = logging.getLogger(__name__)
 from rest_framework.decorators import api_view, permission_classes
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
@@ -253,7 +256,7 @@ class LogoutAPI(generics.GenericAPIView):
             return response
 
         except Exception as e:
-            print(e)
+            logger.error(e)
             return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
@@ -308,7 +311,7 @@ class RegisterAPI(generics.GenericAPIView):
                 "message": "Usuario creado con éxito"
             }, status=status.HTTP_201_CREATED)
         else:
-            print(serializer.errors)
+            logger.error(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get_user_roles(self, user):
