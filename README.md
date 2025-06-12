@@ -11,38 +11,81 @@ Prana is split into two parts:
 
 ### Backend
 
-1. Create and activate a Python virtual environment.
-2. Install Python dependencies and run migrations:
+Below are the steps to set up the Django backend. Two sets of commands are
+provided – one for Windows and another for Linux/macOS.
 
-```bash
-make reqinstall
-make migrate
-```
+1. **Create and activate a Python virtual environment**
 
-Start the development server:
+   **Windows**
+   ```bash
+   python -m venv venv
+   .\\venv\\Scripts\\activate
+   ```
 
-```bash
-python apiRest/manage.py runserver --settings=core.settings.local
-```
+   **Linux**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
-You can also run `make runbe`.
+2. **Install Python dependencies and run migrations**
+
+   **Windows**
+   ```bash
+   pip install -r requirements.txt
+   python apiRest/manage.py migrate --settings=core.settings.local
+   ```
+
+   **Linux**
+   ```bash
+   make reqinstall
+   make migrate
+   ```
+
+3. **Start the development server**
+
+   **Windows**
+   ```bash
+   python apiRest/manage.py runserver --settings=core.settings.local
+   ```
+
+   **Linux**
+   ```bash
+   make runbe
+   ```
 
 ### Frontend
 
-Install Node dependencies:
+The Angular frontend lives in `Frontend/Prana`.
 
-```bash
-cd Frontend/Prana
-npm install
-```
+1. **Install Node dependencies**
 
-Start the development server:
+   **Windows**
+   ```bash
+   cd Frontend/Prana
+   npm install
+   ```
 
-```bash
-ng serve
-```
+   **Linux**
+   ```bash
+   cd Frontend/Prana
+   npm install
+   ```
 
-Alternatively run `make runfe` from the project root.
+2. **Start the development server**
+
+   **Windows**
+   ```bash
+   npx ng serve
+   ```
+
+   **Linux**
+   ```bash
+   make runfe
+   ```
+
+Alternatively run `make runfe` from the project root on Windows as well if `make`
+is available.
 
 ## Environment variables
 
