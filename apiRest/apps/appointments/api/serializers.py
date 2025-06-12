@@ -18,7 +18,7 @@ def set_duration(attrs: dict, instance: Appointment = None) -> dict:
         dict: A dictionary containing appointment attributes, including the 'duration' field.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>        
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     if not attrs.get('duration') and not instance:
@@ -44,7 +44,7 @@ def perform_update(instance: Appointment, validated_data: dict) -> Appointment:
         Appointment: The updated appointment instance.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     update_appointment_details(instance, validated_data)
@@ -84,7 +84,7 @@ def update_hi_details(instance: Appointment, validated_data: dict) -> None:
         None.
 
    Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>        
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     if not validated_data.get('health_insurance'):
@@ -108,7 +108,7 @@ def update_appointment_details(instance: Appointment, validated_data: dict) -> N
         None.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>       
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     original_doctor = instance.doctor
@@ -140,7 +140,7 @@ def validate_existing_appointment(attrs: dict, instance: Appointment) -> dict:
         serializers.ValidationError: If an existing appointment is found for the same doctor, day, and time.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>        
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     existing_appointment = Appointment.objects.filter(
@@ -175,7 +175,7 @@ def validate_appointment_day(attrs: dict) -> dict:
         serializers.ValidationError: If the appointment day is in the past.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>        
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     if attrs.get('day') < date.today():
@@ -198,7 +198,7 @@ def validate_bussines_working_hour(attrs: dict) -> dict:
         serializers.ValidationError: If the appointment hour is outside the business working hours.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     if attrs.get('hour').hour < 7 or attrs.get('hour').hour > 21:
@@ -221,7 +221,7 @@ def validate_appointment_hour(attrs: dict) -> dict:
         serializers.ValidationError: If the appointment time is in the past.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     current_time = datetime.now().time()
@@ -245,7 +245,7 @@ def validate_negative_full_cost(attrs: dict) -> dict:
         serializers.ValidationError: If the full cost is negative.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     if attrs.get('full_cost') is not None and attrs.get('full_cost') < 0:
@@ -269,7 +269,7 @@ def validate_doctor_schedule(attrs: dict, instance: Appointment) -> dict:
         serializers.ValidationError: If the appointment does not fit within the doctor's schedule or if the doctor is not found.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     try:
@@ -301,7 +301,7 @@ def validate_doctor_schedule(attrs: dict, instance: Appointment) -> dict:
 
         if not appointment_flag:
             raise serializers.ValidationError(
-                """El profesional no trabaja en el horario seleccionado. 
+                """El profesional no trabaja en el horario seleccionado.
                 Se sugiere verificar que la duración de la consulta no exceda el horario de salida del profesional""")
 
     # In a update case, check if the professional exists
@@ -327,7 +327,7 @@ def validate_hi(attrs: dict, instance: Appointment) -> dict:
         serializers.ValidationError: If the selected health insurance is not shared between the doctor and patient.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     # Creation
@@ -360,7 +360,7 @@ def validate_specialty(attrs: dict) -> dict:
         serializers.ValidationError: If the selected specialty is not one that the doctor possesses.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     doctor = attrs.get('doctor')
@@ -384,7 +384,7 @@ def validate_branch(attrs: dict) -> dict:
         serializers.ValidationError: If the selected branch is not one that the doctor works in.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     if attrs.get('branch') and not InsurancePlanDoctor.objects.filter(doctor=attrs.get('doctor'), branch=attrs.get('branch')).exists():
@@ -407,7 +407,7 @@ def validate_branch_hi(attrs: dict) -> dict:
         serializers.ValidationError: If there is no relationship between the professional, branch, and health insurance.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     if attrs.get('branch') and attrs.get('health_insurance') and not InsurancePlanDoctor.objects.filter(doctor=attrs.get('doctor'), insurance=attrs.get('health_insurance'), branch=attrs.get('branch')).exists():
@@ -424,7 +424,7 @@ def validate_base_hi():
         serializers.ValidationError: If the base health insurance ('PARTICULAR') does not exist.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     base_hi = HealthInsurance.objects.filter(
@@ -448,7 +448,7 @@ def validate_base_hi_branch(attrs: dict) -> dict:
         serializers.ValidationError: If the professional doesn't work on the specified branch for the base health insurance.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     doctor = attrs.get('doctor')
@@ -483,7 +483,7 @@ def validate_state_branch(attrs: dict, instance: Appointment) -> dict:
         serializers.ValidationError: If a branch is not assigned for an appointment with the payment_status 'Pagado'.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     if not instance and attrs.get('payment_status') == 2 and attrs.get('branch') is None:
@@ -501,11 +501,11 @@ def validate_payment_state(attrs: dict, instance: Appointment):
         instance (Appointment): The appointment instance being updated.
 
     Raises:
-        serializers.ValidationError: If a payment method is not assigned for an appointment with the payment_status 'Pagado', 
+        serializers.ValidationError: If a payment method is not assigned for an appointment with the payment_status 'Pagado',
         or if a payment method is assigned to an appointment with a payment_status other than 'Pagado'.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     # Refactor here
@@ -539,7 +539,7 @@ def appointment_validation(attrs, instance=None):
         serializers.ValidationError: If any validation rule fails.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
 
     # if exist an instance (update) we should not check the day and hour
@@ -598,7 +598,7 @@ class AppointmentSerializerList(serializers.ModelSerializer):
           with customized fields like status, date, cost, copayments, hour, and duration.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         rep = super().to_representation(instance)
@@ -656,7 +656,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
             Appointment: Created Appointment instance.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         appointment = Appointment.objects.create(**validated_data)
@@ -687,7 +687,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
             Appointment: Updated Appointment instance.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         return perform_update(instance, validated_data)
@@ -707,7 +707,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
             serializers.ValidationError: If any validation rule fails.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         instance = self.instance
@@ -756,7 +756,7 @@ class PatientAppointmentSerializer(serializers.ModelSerializer):
             Appointment: Created Appointment instance.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         appointment = Appointment.objects.create(**validated_data)
@@ -779,7 +779,7 @@ class PatientAppointmentSerializer(serializers.ModelSerializer):
             serializers.ValidationError: If any validation rule fails.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         instance = self.instance
@@ -813,7 +813,7 @@ class DoctorAppointmentSerializer(serializers.ModelSerializer):
             Appointment: Created Appointment instance.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         appointment = Appointment.objects.create(**validated_data)
@@ -833,7 +833,7 @@ class DoctorAppointmentSerializer(serializers.ModelSerializer):
             Appointment: Updated Appointment instance.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         return perform_update(instance, validated_data)
@@ -853,7 +853,7 @@ class DoctorAppointmentSerializer(serializers.ModelSerializer):
             serializers.ValidationError: If any validation rule fails.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         instance = self.instance

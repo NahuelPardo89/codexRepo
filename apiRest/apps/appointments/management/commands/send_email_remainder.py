@@ -15,7 +15,7 @@ class Command(BaseCommand):
         # Calcular la fecha de mañana
         tomorrow = datetime.now().date() + timedelta(days=1)
         appointments = Appointment.objects.filter(day=tomorrow)
-        
+
         for appointment in appointments:
             patient = appointment.patient
             doctor = appointment.doctor

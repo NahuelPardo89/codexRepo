@@ -9,7 +9,7 @@ class SeminarScheduleSerializer(serializers.ModelSerializer):
     Serializer class for handling SeminarSchedule model instances.
 
     Author:
-        Alvaro Olguin Armendariz    
+        Alvaro Olguin Armendariz
     """
 
     class Meta:
@@ -101,7 +101,7 @@ class SeminarInscriptionViewSerializer(serializers.ModelSerializer):
         validate(data): Custom validation method to ensure common insurances between patient and seminarist.
 
     Author:
-        Alvaro Olguin Armendariz    
+        Alvaro Olguin Armendariz
     """
 
     def __init__(self, *args, **kwargs):
@@ -280,7 +280,7 @@ class SeminarInscriptionCreateSerializer(serializers.ModelSerializer):
     This serializer provides representation and validation logic for SeminarInscription objects.
 
     Author:
-        Alvaro Olguin Armendariz    
+        Alvaro Olguin Armendariz
     """
 
     class Meta:
@@ -374,7 +374,7 @@ class SeminarInscriptionPatientSerializer(serializers.ModelSerializer):
     This serializer provides representation and validation logic for SeminarInscription objects.
 
     Author:
-        Alvaro Olguin Armendariz    
+        Alvaro Olguin Armendariz
     """
 
     class Meta:
@@ -441,7 +441,7 @@ class SeminarSerializer(serializers.ModelSerializer):
         to_representation(instance): Custom representation method to remove decimal .00 from the 'price' field.
 
     Author:
-        Alvaro Olguin Armendariz.    
+        Alvaro Olguin Armendariz.
     """
 
     def __init__(self, *args, **kwargs):
