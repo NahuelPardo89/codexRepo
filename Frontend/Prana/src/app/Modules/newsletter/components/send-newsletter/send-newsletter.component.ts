@@ -3,20 +3,20 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Newsletter } from 'src/app/Models/newsletter/newsletter.interface';
 import { DialogService } from 'src/app/Services/dialog/dialog.service';
-import { NewletterService } from 'src/app/Services/newletter/newletter.service';
+import { NewsletterService } from 'src/app/Services/newsletter/newsletter.service';
 
 @Component({
-  selector: 'app-sendnewletter',
-  templateUrl: './sendnewletter.component.html',
-  styleUrls: ['./sendnewletter.component.css']
+  selector: 'app-send-newsletter',
+  templateUrl: './send-newsletter.component.html',
+  styleUrls: ['./send-newsletter.component.css']
 })
-export class SendnewletterComponent {
+export class SendNewsletterComponent {
   sendNewsletterForm: FormGroup;
   isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder, 
-    private newsletterService: NewletterService, 
+    private newsletterService: NewsletterService,
     private dialog: DialogService, 
     private router: Router
   ) {

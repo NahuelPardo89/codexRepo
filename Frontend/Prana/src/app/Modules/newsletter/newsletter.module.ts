@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NewsletterRoutingModule } from './newsletter-routing.module';
-import { SendnewletterComponent } from './components/sendnewletter/sendnewletter.component';
+import { SendNewsletterComponent } from './components/send-newsletter/send-newsletter.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,7 +12,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 
 @NgModule({
   declarations: [
-    SendnewletterComponent
+    SendNewsletterComponent
   ],
   imports: [
     CommonModule,
