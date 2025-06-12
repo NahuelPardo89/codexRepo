@@ -14,8 +14,8 @@ export class StoreService {
   }
 
   setTokens(response: JwtResponse){
-    localStorage.setItem('access_token', response.access);
-    localStorage.setItem('refresh_token', response.refresh);
+    document.cookie = `access_token=${response.access}; path=/; secure`;
+    document.cookie = `refresh_token=${response.refresh}; path=/; secure;`;
   }
 
   setCurrentRole(role: string){
@@ -36,16 +36,20 @@ export class StoreService {
   getCurrentRole(): string {
     return localStorage.getItem('currentRole') || this.getUserRoles()[0]; // Devuelve el primer rol disponible si no hay ninguno seleccionado
   }
+  private getCookie(name: string): string {
+    const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : '';
+  }
   getAccessToken(): string {
-    return localStorage.getItem('access_token')||'';
+    return this.getCookie('access_token');
   }
   getRefreshToken(): string {
-    return localStorage.getItem('refresh_token')||'';
+    return this.getCookie('refresh_token');
   }
   clearSesionStorage(): void {
     
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('access_token');
+    document.cookie = 'refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     localStorage.removeItem('user');
     localStorage.removeItem('roles');
     localStorage.removeItem('currentRole');
