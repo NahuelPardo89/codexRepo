@@ -59,9 +59,9 @@ export class AuthService {
       .post<JwtResponse>(this.loginUrl, user, { withCredentials: true })
       .pipe(
         tap((response) => this.handleLogin(response)),
-        catchError((error) => {
+        catchError((error: HttpErrorResponse) => {
           this.dialogService.showErrorDialog(error.error?.message || 'Usuario o Contraseña incorrectos');
-          return throwError(() => new Error('Error al iniciar sesión'));
+          return throwError(() => error);
         })
       );
   }

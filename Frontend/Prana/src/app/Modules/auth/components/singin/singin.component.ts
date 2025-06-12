@@ -10,7 +10,7 @@ import { DialogService } from 'src/app/Services/dialog/dialog.service';
   templateUrl: './singin.component.html',
   styleUrls: ['./singin.component.css']
 })
-export class SinginComponent {
+export class SinginComponent implements OnInit {
   registerForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router,private authService: AuthService, private dialogService: DialogService) {
@@ -23,7 +23,7 @@ export class SinginComponent {
       name: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9+\-ñ ]*$"),]],
       last_name: ['', [Validators.required,Validators.pattern("^[a-zA-Z0-9+\-ñ ]*$")]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._+-ñ]+@[a-zA-Z0-9_.-]+\.[a-zA-Z]{2,4}$')]],
-      phone: [''],
+      phone: ['', [Validators.pattern('^[0-9]*$')]],
       password: ['', [Validators.required, Validators.minLength(8)]]
       
     });
@@ -42,6 +42,10 @@ export class SinginComponent {
 
   get email() {
     return this.registerForm.get('email');
+  }
+
+  get phone() {
+    return this.registerForm.get('phone');
   }
   get password() {
     return this.registerForm.get('password');

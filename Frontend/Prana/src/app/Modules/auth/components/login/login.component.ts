@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 import { JwtResponse } from 'src/app/Models/user/jwtResponse.interface';
 import { LoginUser } from 'src/app/Models/user/loginUser.interface';
 import { AuthService } from 'src/app/Services/auth/auth.service';
@@ -37,7 +38,13 @@ export class LoginComponent implements OnInit , OnDestroy{
     if (this.loginForm.valid) {
       const user: LoginUser = this.loginForm.value;
 
-      this.loginSub = this.authService.login(user).subscribe();
+      this.errorMessage = '';
+      this.loginSub = this.authService.login(user).subscribe({
+        next: () => {},
+        error: (error: HttpErrorResponse) => {
+          this.errorMessage = error.error?.message || 'Usuario o Contrase\u00f1a incorrectos';
+        }
+      });
 
     }
   }
