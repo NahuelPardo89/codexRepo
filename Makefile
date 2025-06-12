@@ -27,8 +27,8 @@ clean:
 
 # Target to clean up migrations (USE WITH CAUTION!)
 cleanmigrations:
-	del /s /q .\api\migrations\*.py
-	del /s /q .\api\migrations\*.pyc
+       rm -f ./api/migrations/*.py
+       rm -f ./api/migrations/*.pyc
 
 # Target to start a backend development server
 runbe:
