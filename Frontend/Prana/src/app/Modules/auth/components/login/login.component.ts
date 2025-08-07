@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit , OnDestroy{
+export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   public errorMessage: string = '';
   private loginSub?: Subscription;
@@ -31,9 +31,7 @@ export class LoginComponent implements OnInit , OnDestroy{
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
-  ngOnDestroy(): void {
-    this.loginSub?.unsubscribe();
-  }
+
   onSubmit(): void {
     if (this.loginForm.valid) {
       const user: LoginUser = this.loginForm.value;
