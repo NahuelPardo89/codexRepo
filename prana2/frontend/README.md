@@ -1,0 +1,3 @@
+# Frontend
+
+Pendiente de implementación.
