@@ -24,7 +24,7 @@ class AppointmentListCreateView(APIView):
     API view for listing and creating appointments.
 
     Author:
-        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>     
+        Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
     """
     permission_classes = [IsAdminOrReadOnly, ]
 

@@ -27,7 +27,7 @@ class PaymentMethod(models.Model):
             str: The string representation of the payment method.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
         return self.name
 
@@ -89,7 +89,7 @@ class Appointment(models.Model):
             set: A set containing the common HealthInsurance objects.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         return set(self.doctor.insurances.all()) & set(
@@ -107,7 +107,7 @@ class Appointment(models.Model):
             None
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>    
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         if not self.branch:
@@ -131,7 +131,7 @@ class Appointment(models.Model):
             None
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>        
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         # initialize variables as "Particular" health insurance to find the full cost
@@ -159,7 +159,7 @@ class Appointment(models.Model):
             None.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>       
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         if (not self.health_insurance) or update:
@@ -195,7 +195,7 @@ class Appointment(models.Model):
             None
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>        
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
         self.specialty = self.doctor.specialty.first()
@@ -263,10 +263,10 @@ class Appointment(models.Model):
             str: A formatted string containing appointment information.
 
         Author:
-            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>                
+            Alvaro Olguin Armendariz <alvaroarmendariz11@gmail.com>
         """
 
-        return f"""Turno del día: {self.day} , Horario: {self.hour} \n 
-            Paciente: {self.patient.user.last_name}, {self.patient.user.name} \n 
+        return f"""Turno del día: {self.day} , Horario: {self.hour} \n
+            Paciente: {self.patient.user.last_name}, {self.patient.user.name} \n
             Profesional: {self.doctor.user.last_name}, {self.doctor.user.name} \n
             """
